@@ -156,18 +156,29 @@ class ProductsProvider extends ChangeNotifier {
     final id = _products[productIndex].id;
 
     try {
+      // delete all subProducts from the database
+      for (var i = 0; i <= _products[productIndex].subProducts.length; i++) {
+        await deleteSubProduct(productIndex, i, isAfterProductDelete: true);
+      }
+
       // delete from the products list
       _products.removeAt(productIndex);
 
       // delete from the database
       _repo.deleteProduct(id);
+
+      // TODO: Notify of product delete
     } on Exception catch (e) {
       debugPrint('$e');
     }
     stopLoading();
   }
 
-  Future<void> deleteSubProduct(int productIndex, int subProductIndex) async {
+  Future<void> deleteSubProduct(
+    int productIndex,
+    int subProductIndex, {
+    bool isAfterProductDelete = false,
+  }) async {
     startLoading();
     final id = _products[productIndex].subProducts[subProductIndex].id;
 
@@ -177,6 +188,10 @@ class ProductsProvider extends ChangeNotifier {
 
       // delete the subproduct in the database
       await _repo.deleteSubProduct(id);
+
+      if (!isAfterProductDelete) {
+        // TODO: Notify of subProduct delete if isAfterProductDelete = false
+      }
     } on Exception catch (e) {
       debugPrint('$e');
     }
