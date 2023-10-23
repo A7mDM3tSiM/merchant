@@ -124,12 +124,12 @@ class ProductBottomSheetWidget extends StatelessWidget {
               if (home.isAllFieldsFilled()) {
                 pro.addSubProduct(
                   product?.id ?? 0,
-                  pro.getProductIndex(product) ?? 0,
+                  pro.getProductIndex(product?.id) ?? 0,
                   home.nameController.text,
                   int.tryParse(home.priceController.text) ?? 0,
                   int.tryParse(home.countController.text) ?? 0,
                 );
-                home.clearAndReset();
+                home.closeBottomSheet();
               }
             },
           ),

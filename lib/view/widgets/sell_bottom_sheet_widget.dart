@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:merchant/models/product/product_model.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
 import 'package:merchant/view/widgets/global_confirm_button.dart';
 import 'package:provider/provider.dart';
 
-class HomeBottomSheetWidget extends StatelessWidget {
-  const HomeBottomSheetWidget({super.key});
+class SellBottomSheetWidget extends StatelessWidget {
+  final SubProduct subProduct;
+  const SellBottomSheetWidget({super.key, required this.subProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                   ),
                   child: TextField(
                     controller: home.nameController,
+                    enabled: false,
                     keyboardType: TextInputType.name,
                     textDirection: TextDirection.rtl,
                   ),
@@ -120,10 +123,12 @@ class HomeBottomSheetWidget extends StatelessWidget {
               final home = context.read<HomeProvider>();
 
               if (home.isAllFieldsFilled()) {
-                pro.addProduct(
-                  home.nameController.text,
-                  price: int.tryParse(home.priceController.text),
-                  totalBought: int.tryParse(home.countController.text),
+                pro.sellSubProduct(
+                  pro.getProductIndex(subProduct.parentId) ?? 0,
+                  pro.getSubProductIndex(subProduct.parentId, subProduct.id) ??
+                      0,
+                  int.tryParse(home.countController.text) ?? 0,
+                  int.tryParse(home.priceController.text) ?? 0,
                 );
                 home.closeBottomSheet();
               }

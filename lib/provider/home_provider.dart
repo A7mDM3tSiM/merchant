@@ -21,7 +21,6 @@ class HomeProvider extends ChangeNotifier {
     nameController.clear();
     countController.clear();
     priceController.clear();
-    closeBottomSheet();
   }
 
   /// This function is used to toggle the floating action button icon
@@ -32,6 +31,7 @@ class HomeProvider extends ChangeNotifier {
       controller?.close();
       controller = null;
     }
+    clearAndReset();
     notifyListeners();
   }
 

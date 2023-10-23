@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:merchant/models/product/product_model.dart';
+import 'package:merchant/provider/home_provider.dart';
+import 'package:merchant/view/widgets/buy_bottom_sheet_widget.dart';
+import 'package:merchant/view/widgets/sell_bottom_sheet_widget.dart';
+import 'package:provider/provider.dart';
 
 class SubProductWidget extends StatelessWidget {
   final SubProduct subProduct;
@@ -27,16 +31,55 @@ class SubProductWidget extends StatelessWidget {
             width: w * 0.3,
             child: Row(
               children: [
-                const Icon(
-                  Icons.download,
-                  color: Colors.amber,
+                Consumer<HomeProvider>(
+                  builder: (_, home, __) => GestureDetector(
+                    onTap: () {
+                      if (home.controller != null) {
+                        home.closeBottomSheet();
+                      } else {
+                        home.nameController.text = subProduct.name;
+                        home.priceController.text = subProduct.price.toString();
+                        home.openBottomSheet();
+                        home.controller = showBottomSheet(
+                          context: context,
+                          enableDrag: false,
+                          builder: (context) => BuyBottomSheetWidget(
+                            subProduct: subProduct,
+                          ),
+                        );
+                      }
+                    },
+                    child: const Icon(
+                      Icons.download,
+                      color: Colors.amber,
+                    ),
+                  ),
                 ),
                 SizedBox(width: w * 0.03),
                 Transform.rotate(
                   angle: pi,
-                  child: const Icon(
-                    Icons.download,
-                    color: Colors.green,
+                  child: Consumer<HomeProvider>(
+                    builder: (_, home, __) => GestureDetector(
+                      onTap: () {
+                        if (home.controller != null) {
+                          home.closeBottomSheet();
+                        } else {
+                          home.nameController.text = subProduct.name;
+                          home.openBottomSheet();
+                          home.controller = showBottomSheet(
+                            context: context,
+                            enableDrag: false,
+                            builder: (context) => SellBottomSheetWidget(
+                              subProduct: subProduct,
+                            ),
+                          );
+                        }
+                      },
+                      child: const Icon(
+                        Icons.download,
+                        color: Colors.green,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(width: w * 0.025),

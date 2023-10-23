@@ -20,9 +20,16 @@ class ProductsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int? getProductIndex(Product? product) {
-    if (product == null) return null;
-    return _products.indexOf(product);
+  int? getProductIndex(int? id) {
+    if (id == null) return null;
+    return _products.indexWhere((pro) => pro.id == id);
+  }
+
+  int? getSubProductIndex(int? parentId, int? id) {
+    if (parentId == null || id == null) return null;
+    final parent = _products[getProductIndex(parentId) ?? 0];
+
+    return parent.subProducts.indexWhere((sub) => sub.id == id);
   }
 
   /// Get the products when the app starts and use [assignSubProductsToProducts]
