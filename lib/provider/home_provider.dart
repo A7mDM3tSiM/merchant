@@ -5,6 +5,7 @@ class HomeProvider extends ChangeNotifier {
   final nameController = TextEditingController();
   final countController = TextEditingController();
   final priceController = TextEditingController();
+  final searchController = TextEditingController();
 
   PersistentBottomSheetController? controller;
   bool isBottomSheetOpened = false;

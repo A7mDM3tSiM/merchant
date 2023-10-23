@@ -18,8 +18,10 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Market Name",
-          style: TextStyle(fontSize: h * 0.023),
+          style: TextStyle(color: Colors.black, fontSize: h * 0.023),
         ),
+        leading: const SizedBox(),
+        backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -36,7 +38,7 @@ class HomeView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: w * 0.85,
+                  width: w * 0.9,
                   padding: EdgeInsets.symmetric(horizontal: w * 0.03),
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
@@ -44,18 +46,25 @@ class HomeView extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      const Expanded(
-                        child: TextField(
-                          textDirection: TextDirection.rtl,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
+                      Expanded(
+                        child: Consumer<HomeProvider>(
+                          builder: (_, home, __) => TextField(
+                            controller: home.searchController,
+                            onChanged: (value) {
+                              final pro = context.read<ProductsProvider>();
+                              pro.stopLoading();
+                            },
+                            textDirection: TextDirection.rtl,
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: w * 0.03),
                       const Icon(
                         Icons.search,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                     ],
                   ),
@@ -68,6 +77,8 @@ class HomeView extends StatelessWidget {
           ),
           Consumer<ProductsProvider>(
             builder: (_, pro, __) {
+              final home = context.read<HomeProvider>();
+              final listToShow = pro.listToShow(home.searchController.text);
               if (pro.isLoading) {
                 return Column(
                   children: [
@@ -78,7 +89,7 @@ class HomeView extends StatelessWidget {
                   ],
                 );
               }
-              if (pro.products.isEmpty) {
+              if (listToShow.isEmpty) {
                 return Column(
                   children: [
                     SizedBox(height: h * 0.3),
@@ -92,9 +103,9 @@ class HomeView extends StatelessWidget {
                 height: h * 0.75,
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: pro.products.length,
+                  itemCount: listToShow.length,
                   itemBuilder: (context, index) => ProductWidget(
-                    product: pro.products[index],
+                    product: listToShow[index],
                   ),
                 ),
               );
@@ -118,11 +129,12 @@ class HomeView extends StatelessWidget {
                   );
                 }
               },
+              backgroundColor: Colors.white,
               child: Icon(
                 home.isBottomSheetOpened
                     ? Icons.arrow_drop_down_outlined
                     : Icons.add,
-                color: Colors.white,
+                color: Colors.black,
               ),
             );
           },

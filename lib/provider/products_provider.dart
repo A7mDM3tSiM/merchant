@@ -33,6 +33,23 @@ class ProductsProvider extends ChangeNotifier {
     return parent.subProducts.indexWhere((sub) => sub.id == id);
   }
 
+  List<Product> listToShow(String search) {
+    search = search.trim();
+    if (search.isEmpty) {
+      return _products;
+    }
+
+    final list = <Product>[];
+
+    for (final pro in products) {
+      if (pro.name.contains(search)) {
+        list.add(pro);
+      }
+    }
+
+    return list;
+  }
+
   /// Get the products when the app starts and use [assignSubProductsToProducts]
   /// to filter the products and add subProducts to each product
   Future<void> fecthProducts() async {

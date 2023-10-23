@@ -41,7 +41,7 @@ class ProductView extends StatelessWidget {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.grey,
+              color: Colors.black,
             ),
           ),
         ),
@@ -49,7 +49,7 @@ class ProductView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: w * 0.05),
           child: Column(
             children: [
-              SizedBox(height: h * 0.15),
+              SizedBox(height: h * 0.1),
               Text(
                 args.product?.name ?? "",
                 style: TextStyle(fontSize: h * 0.04),
@@ -141,7 +141,7 @@ class ProductView extends StatelessWidget {
               ),
               SizedBox(height: h * 0.01),
               SizedBox(
-                height: h * 0.45,
+                height: h * 0.525,
                 child: Consumer<ProductsProvider>(
                   builder: (_, __, ___) => ListView.builder(
                     shrinkWrap: true,
@@ -184,11 +184,12 @@ class ProductView extends StatelessWidget {
                     );
                   }
                 },
+                backgroundColor: Colors.white,
                 child: Icon(
                   home.isBottomSheetOpened
                       ? Icons.arrow_drop_down_outlined
                       : Icons.add,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               );
             },
