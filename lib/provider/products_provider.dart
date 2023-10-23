@@ -67,6 +67,13 @@ class ProductsProvider extends ChangeNotifier {
       debugPrint('$e');
     }
 
+    addSubProduct(
+      newProduct.id,
+      _products.indexOf(newProduct),
+      name,
+      price ?? 0,
+      totalBought ?? 0,
+    );
     stopLoading();
   }
 

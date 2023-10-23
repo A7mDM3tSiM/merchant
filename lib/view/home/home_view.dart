@@ -16,35 +16,57 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Market Name"),
+        title: Text(
+          "Market Name",
+          style: TextStyle(fontSize: h * 0.023),
+        ),
         centerTitle: true,
         elevation: 0.0,
       ),
       body: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.filter_list,
-                color: Colors.grey,
-              ),
-              SizedBox(width: w * 0.05),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
+          SizedBox(
+            height: h * 0.025,
+          ),
+          SizedBox(
+            width: w,
+            height: h * 0.05,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.filter_list,
+                  color: Colors.grey,
                 ),
-                child: Row(
-                  children: const [
-                    Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    ),
-                    TextField(),
-                  ],
+                SizedBox(width: w * 0.05),
+                Container(
+                  width: w * 0.85,
+                  padding: EdgeInsets.symmetric(horizontal: w * 0.03),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: TextField(
+                          textDirection: TextDirection.rtl,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: w * 0.03),
+                      const Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           SizedBox(
             height: h * 0.05,
@@ -71,11 +93,14 @@ class HomeView extends StatelessWidget {
                   ],
                 );
               }
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: pro.products.length,
-                itemBuilder: (context, index) => ProductWidget(
-                  product: pro.products[index],
+              return SizedBox(
+                height: h * 0.7,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: pro.products.length,
+                  itemBuilder: (context, index) => ProductWidget(
+                    product: pro.products[index],
+                  ),
                 ),
               );
             },
@@ -83,26 +108,29 @@ class HomeView extends StatelessWidget {
         ],
       ),
       floatingActionButton: Consumer<HomeProvider>(
-        builder: (_, home, __) => FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          onPressed: () {
-            if (home.controller != null) {
-              home.closeBottomSheet();
-            } else {
-              home.openBottomSheet();
-              home.controller = showBottomSheet(
-                context: context,
-                enableDrag: false,
-                builder: (context) => const HomeBottomSheetWidget(),
-              );
-            }
+        builder: (_, home, __) => Builder(
+          builder: (context) {
+            return FloatingActionButton(
+              onPressed: () {
+                if (home.controller != null) {
+                  home.closeBottomSheet();
+                } else {
+                  home.openBottomSheet();
+                  home.controller = showBottomSheet(
+                    context: context,
+                    enableDrag: false,
+                    builder: (context) => const HomeBottomSheetWidget(),
+                  );
+                }
+              },
+              child: Icon(
+                home.isBottomSheetOpened
+                    ? Icons.arrow_drop_down_outlined
+                    : Icons.add,
+                color: Colors.white,
+              ),
+            );
           },
-          child: Icon(
-            home.isBottomSheetOpened
-                ? Icons.arrow_drop_down_outlined
-                : Icons.add,
-            color: Colors.white,
-          ),
         ),
       ),
     );

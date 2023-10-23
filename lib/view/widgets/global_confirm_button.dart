@@ -15,11 +15,14 @@ class ConfirmButton extends StatelessWidget {
         height: h * 0.06,
         width: w * 0.85,
         decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(15),
         ),
-        child: const Center(
-          child: Text("Confirm"),
+        child: Center(
+          child: Text(
+            "Confirm",
+            style: TextStyle(color: Colors.white, fontSize: h * 0.02),
+          ),
         ),
       ),
     );

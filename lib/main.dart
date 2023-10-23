@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:merchant/provider/home_provider.dart';
+import 'package:merchant/provider/products_provider.dart';
 import 'package:merchant/services/database_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,7 @@ Future<void> main() async {
   prefs = await SharedPreferences.getInstance();
 
   // Init database
-  DatabaseService.init();
+  await DatabaseService.init();
 
   runApp(
     const MyApp(),
@@ -43,6 +45,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ThemeManegerProvider>(
           create: (_) => ThemeManegerProvider(),
         ),
+        ChangeNotifierProvider<HomeProvider>(
+          create: (_) => HomeProvider(),
+        ),
+        ChangeNotifierProvider<ProductsProvider>(
+          create: (_) => ProductsProvider(),
+        ),
       ],
       child: Consumer<ThemeManegerProvider>(
         builder: (context, theme, _) {
@@ -50,6 +58,7 @@ class MyApp extends StatelessWidget {
             routes: Routes.routes,
             initialRoute: Routes.splashRoute,
             scaffoldMessengerKey: scaffoldMessengerKey,
+            navigatorKey: NavigationService.navKey,
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: theme.themeMode,

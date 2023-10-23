@@ -25,10 +25,6 @@ class Product {
       for (final subProduct in subProducts) {
         this.subProducts.add(subProduct);
       }
-    } else {
-      this
-          .subProducts
-          .add(SubProduct(id ?? 0, name, price ?? 0, totalBought ?? 0));
     }
 
     this.createdAt = createdAt ?? DateTime.now().toString();
@@ -49,7 +45,7 @@ class Product {
       data['name'] ?? "",
       id: data['id'] ?? 0,
       createdAt: data['created_at'] ?? "",
-      updatedAt: data['uodated_at'] ?? "",
+      updatedAt: data['updated_at'] ?? "",
     );
   }
 }
@@ -117,7 +113,7 @@ class SubProduct {
       totalSoldPrice: data['total_sold_price'] ?? 0,
       totalProfit: data['total_profit'] ?? 0,
       createdAt: data['created_at'] ?? "",
-      updatedAt: data['uodated_at'] ?? "",
+      updatedAt: data['updated_at'] ?? "",
     );
   }
 

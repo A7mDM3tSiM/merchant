@@ -10,58 +10,128 @@ class HomeBottomSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
 
-    return ListView(
-      children: [
-        Row(
-          children: [
-            Consumer<HomeProvider>(
-              builder: (_, home, __) => TextField(
-                controller: home.nameController,
-                keyboardType: TextInputType.name,
-              ),
-            ),
-            const Text("Name"),
-          ],
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: w * 0.05),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
         ),
-        Row(
-          children: [
-            Consumer<HomeProvider>(
-              builder: (_, home, __) => TextField(
-                controller: home.countController,
-                keyboardType: const TextInputType.numberWithOptions(),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey[200]!,
+            blurRadius: 5,
+            offset: const Offset(0, -3),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: h * 0.03),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Consumer<HomeProvider>(
+                builder: (_, home, __) => Container(
+                  width: w * 0.75,
+                  decoration: const BoxDecoration(
+                    border: BorderDirectional(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  child: TextField(
+                    controller: home.nameController,
+                    keyboardType: TextInputType.name,
+                    textDirection: TextDirection.rtl,
+                  ),
+                ),
               ),
-            ),
-            const Text("Count"),
-          ],
-        ),
-        Row(
-          children: [
-            Consumer<HomeProvider>(
-              builder: (_, home, __) => TextField(
-                controller: home.priceController,
-                keyboardType: const TextInputType.numberWithOptions(),
+              SizedBox(width: w * 0.05),
+              const Text("Name"),
+            ],
+          ),
+          SizedBox(height: h * 0.03),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Consumer<HomeProvider>(
+                    builder: (_, home, __) => Container(
+                      width: w * 0.3,
+                      decoration: const BoxDecoration(
+                        border: BorderDirectional(
+                          bottom: BorderSide(
+                            width: 1,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      child: TextField(
+                        controller: home.countController,
+                        keyboardType: TextInputType.number,
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: w * 0.05),
+                  const Text("Count"),
+                ],
               ),
-            ),
-            const Text("Price"),
-          ],
-        ),
-        SizedBox(height: h * 0.03),
-        ConfirmButton(
-          onTap: () {
-            final pro = context.read<ProductsProvider>();
-            final home = context.read<HomeProvider>();
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Consumer<HomeProvider>(
+                    builder: (_, home, __) => Container(
+                      width: w * 0.3,
+                      decoration: const BoxDecoration(
+                        border: BorderDirectional(
+                          bottom: BorderSide(
+                            width: 1,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      child: TextField(
+                        controller: home.priceController,
+                        keyboardType: TextInputType.number,
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: w * 0.05),
+                  const Text("Price"),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: h * 0.03),
+          ConfirmButton(
+            onTap: () {
+              final pro = context.read<ProductsProvider>();
+              final home = context.read<HomeProvider>();
 
-            if (home.isAllFieldsFilled()) {
-              pro.addProduct(
-                home.nameController.text,
-                price: int.tryParse(home.priceController.text),
-                totalBought: int.tryParse(home.countController.text),
-              );
-            }
-          },
-        ),
-      ],
+              if (home.isAllFieldsFilled()) {
+                pro.addProduct(
+                  home.nameController.text,
+                  price: int.tryParse(home.priceController.text),
+                  totalBought: int.tryParse(home.countController.text),
+                );
+                home.clearAndReset();
+              }
+            },
+          ),
+          SizedBox(height: h * 0.03),
+        ],
+      ),
     );
   }
 }

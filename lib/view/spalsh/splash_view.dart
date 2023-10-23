@@ -21,8 +21,8 @@ class _SplashViewState extends State<SplashView> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        await pro.fecthProducts();
         NavigationService.pushReplacement(Routes.homeRoute);
+        await pro.fecthProducts();
       },
     );
   }

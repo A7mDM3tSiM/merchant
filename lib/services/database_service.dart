@@ -1,12 +1,13 @@
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
   static late Database _db;
 
   static Future init() async {
-    openDatabase(
+    _db = await openDatabase(
       join(await getDatabasesPath(), "merchant.db"),
       onCreate: (db, version) {
         _db = db;
@@ -16,31 +17,33 @@ class DatabaseService {
           "name TEXT,"
           "password TEXT,"
           "created_at TEXT,"
-          "updated_at TEXT,)",
+          "updated_at TEXT)",
         );
         _db.execute(
           "CREATE TABLE products"
           "(id INTEGER PRIMARY KEY,"
           "name TEXT,"
           "created_at TEXT,"
-          "updated_at TEXT,)",
+          "updated_at TEXT)",
         );
         _db.execute(
           "CREATE TABLE sub_products"
           "(id INTEGER PRIMARY KEY,"
-          "parent_id INTEGER"
+          "parent_id INTEGER,"
           "name TEXT,"
-          "price TEXT,"
+          "price INTEGER,"
           "total_bought INETGER,"
           "total_sold INETGER,"
           "total_sold_price INETGER,"
           "total_profit INETGER,"
           "created_at TEXT,"
-          "updated_at TEXT,)",
+          "updated_at TEXT)",
         );
+        debugPrint('CREATED: $_db');
       },
       onOpen: (db) {
         _db = db;
+        debugPrint('OPENED: $_db');
       },
       version: 1,
     );

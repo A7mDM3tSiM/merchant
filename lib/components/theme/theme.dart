@@ -34,11 +34,6 @@ ThemeData lightTheme = ThemeData(
       color: Colors.black,
     ),
   ),
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: Colors.grey[300],
-    border: InputBorder.none,
-  ),
 );
 
 ThemeData darkTheme = ThemeData(

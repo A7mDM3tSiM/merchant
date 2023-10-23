@@ -11,19 +11,21 @@ class ProductWidget extends StatelessWidget {
     final w = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.025),
+      padding: EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.015),
+      margin: EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.01),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(width: 1, color: Colors.black),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(product.name),
           const Icon(
             Icons.arrow_back_ios,
             color: Colors.grey,
           ),
+          Text(product.name),
         ],
       ),
     );

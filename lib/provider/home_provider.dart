@@ -17,6 +17,13 @@ class HomeProvider extends ChangeNotifier {
     return true;
   }
 
+  void clearAndReset() {
+    nameController.clear();
+    countController.clear();
+    priceController.clear();
+    closeBottomSheet();
+  }
+
   /// This function is used to toggle the floating action button icon
   /// and close the bottom sheet
   void closeBottomSheet() {
