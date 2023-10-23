@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:merchant/models/product/products_repo.dart';
 
 import '../models/product/product_model.dart';
@@ -102,7 +103,11 @@ class ProductsProvider extends ChangeNotifier {
       // add the subProduct to the database
       await _repo.addSubProduct(newSubProduct);
 
-      // TODO: Notify of product added
+      // Notify of product added
+      Fluttertoast.showToast(
+        msg: "New product added",
+        backgroundColor: Colors.green,
+      );
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -121,7 +126,11 @@ class ProductsProvider extends ChangeNotifier {
       await _repo.updateSubProduct(
         _products[productIndex].subProducts[subProductIndex],
       );
-      // TODO: Notify of product bought
+      // Notify of product bought
+      Fluttertoast.showToast(
+        msg: "New product added",
+        backgroundColor: Colors.green,
+      );
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -141,11 +150,19 @@ class ProductsProvider extends ChangeNotifier {
         _products[productIndex].subProducts[subProductIndex],
       );
 
-      // TODO: Notify of product sold
+      // Notify of product sold
+      Fluttertoast.showToast(
+        msg: "Product sold",
+        backgroundColor: Colors.green,
+      );
     } on Exception catch (e) {
       debugPrint('$e');
       if (e.toString().contains("302")) {
-        // TODO: Notify of amount excceded
+        // Notify of amount excceded
+        Fluttertoast.showToast(
+          msg: "Excceded product available amount",
+          backgroundColor: Colors.red,
+        );
       }
     }
     stopLoading();
@@ -167,7 +184,11 @@ class ProductsProvider extends ChangeNotifier {
       // delete from the database
       _repo.deleteProduct(id);
 
-      // TODO: Notify of product delete
+      // Notify of product delete
+      Fluttertoast.showToast(
+        msg: "Product deleted",
+        backgroundColor: Colors.green,
+      );
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -189,8 +210,12 @@ class ProductsProvider extends ChangeNotifier {
       // delete the subproduct in the database
       await _repo.deleteSubProduct(id);
 
+      // Notify of subProduct delete if isAfterProductDelete = false
       if (!isAfterProductDelete) {
-        // TODO: Notify of subProduct delete if isAfterProductDelete = false
+        Fluttertoast.showToast(
+          msg: "Product deleted",
+          backgroundColor: Colors.green,
+        );
       }
     } on Exception catch (e) {
       debugPrint('$e');

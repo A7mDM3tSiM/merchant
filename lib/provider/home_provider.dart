@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeProvider extends ChangeNotifier {
   final nameController = TextEditingController();
@@ -12,7 +13,11 @@ class HomeProvider extends ChangeNotifier {
     if (nameController.text.isEmpty ||
         countController.text.isEmpty ||
         priceController.text.isEmpty) {
-      // TODO: Notify of unfilled fields
+      // Notify of unfilled fields
+      Fluttertoast.showToast(
+        msg: "Complete all fields",
+        backgroundColor: Colors.red,
+      );
       return false;
     }
     return true;
