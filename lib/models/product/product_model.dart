@@ -64,6 +64,8 @@ class SubProduct {
   late String createdAt;
   late String updatedAt;
 
+  String get currentCount => (totalBought - totalSold).toString();
+
   SubProduct(
     this.parentId,
     this.name,

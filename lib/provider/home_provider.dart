@@ -26,7 +26,7 @@ class HomeProvider extends ChangeNotifier {
 
   /// This function is used to toggle the floating action button icon
   /// and close the bottom sheet
-  void closeBottomSheet() {
+  Future<void> closeBottomSheet() async {
     isBottomSheetOpened = false;
     if (controller != null) {
       controller?.close();

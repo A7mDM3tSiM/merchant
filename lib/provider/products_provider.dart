@@ -20,6 +20,11 @@ class ProductsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int? getProductIndex(Product? product) {
+    if (product == null) return null;
+    return _products.indexOf(product);
+  }
+
   /// Get the products when the app starts and use [assignSubProductsToProducts]
   /// to filter the products and add subProducts to each product
   Future<void> fecthProducts() async {
