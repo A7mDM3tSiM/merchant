@@ -12,6 +12,7 @@ class HomeProvider extends ChangeNotifier {
     if (nameController.text.isEmpty ||
         countController.text.isEmpty ||
         priceController.text.isEmpty) {
+      // TODO: Notify of unfilled fields
       return false;
     }
     return true;

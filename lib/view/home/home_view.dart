@@ -35,11 +35,6 @@ class HomeView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.filter_list,
-                  color: Colors.grey,
-                ),
-                SizedBox(width: w * 0.05),
                 Container(
                   width: w * 0.85,
                   padding: EdgeInsets.symmetric(horizontal: w * 0.03),
@@ -94,7 +89,7 @@ class HomeView extends StatelessWidget {
                 );
               }
               return SizedBox(
-                height: h * 0.7,
+                height: h * 0.75,
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: pro.products.length,

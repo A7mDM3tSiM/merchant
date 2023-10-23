@@ -28,7 +28,7 @@ class SubProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width: w * 0.3,
+            width: w * 0.33,
             child: Row(
               children: [
                 Consumer<HomeProvider>(
@@ -55,7 +55,7 @@ class SubProductWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: w * 0.03),
+                SizedBox(width: w * 0.02),
                 Transform.rotate(
                   angle: pi,
                   child: Consumer<HomeProvider>(

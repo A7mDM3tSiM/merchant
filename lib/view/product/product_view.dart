@@ -59,7 +59,6 @@ class ProductView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: w * 0.2,
                     padding: EdgeInsets.all(h * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -70,17 +69,20 @@ class ProductView extends StatelessWidget {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
+                      children: [
+                        const Icon(
                           Icons.add_chart_outlined,
                           color: Colors.blue,
                         ),
-                        Text("10000"),
+                        Consumer<ProductsProvider>(
+                          builder: (_, __, ___) => Text(
+                            args.product?.totalProfit ?? "",
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Container(
-                    width: w * 0.2,
                     padding: EdgeInsets.all(h * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -91,17 +93,20 @@ class ProductView extends StatelessWidget {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
+                      children: [
+                        const Icon(
                           Icons.arrow_upward_rounded,
                           color: Colors.green,
                         ),
-                        Text("10000"),
+                        Consumer<ProductsProvider>(
+                          builder: (_, __, ___) => Text(
+                            args.product?.totalGot ?? "",
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Container(
-                    width: w * 0.2,
                     padding: EdgeInsets.all(h * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -112,12 +117,15 @@ class ProductView extends StatelessWidget {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
+                      children: [
+                        const Icon(
                           Icons.arrow_downward_rounded,
                           color: Colors.amber,
                         ),
-                        Text("10000"),
+                        Consumer<ProductsProvider>(
+                          builder: (_, __, ___) =>
+                              Text(args.product?.totalSpent ?? ""),
+                        ),
                       ],
                     ),
                   ),

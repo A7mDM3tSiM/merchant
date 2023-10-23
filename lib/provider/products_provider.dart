@@ -79,13 +79,8 @@ class ProductsProvider extends ChangeNotifier {
       debugPrint('$e');
     }
 
-    addSubProduct(
-      newProduct.id,
-      _products.indexOf(newProduct),
-      name,
-      price ?? 0,
-      totalBought ?? 0,
-    );
+    addSubProduct(newProduct.id, _products.indexOf(newProduct), name,
+        price ?? 0, totalBought ?? 0);
     stopLoading();
   }
 
@@ -106,6 +101,8 @@ class ProductsProvider extends ChangeNotifier {
 
       // add the subProduct to the database
       await _repo.addSubProduct(newSubProduct);
+
+      // TODO: Notify of product added
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -124,6 +121,7 @@ class ProductsProvider extends ChangeNotifier {
       await _repo.updateSubProduct(
         _products[productIndex].subProducts[subProductIndex],
       );
+      // TODO: Notify of product bought
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -142,8 +140,13 @@ class ProductsProvider extends ChangeNotifier {
       await _repo.updateSubProduct(
         _products[productIndex].subProducts[subProductIndex],
       );
+
+      // TODO: Notify of product sold
     } on Exception catch (e) {
       debugPrint('$e');
+      if (e.toString().contains("302")) {
+        // TODO: Notify of amount excceded
+      }
     }
     stopLoading();
   }

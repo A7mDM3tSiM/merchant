@@ -9,6 +9,30 @@ class Product {
 
   final subProducts = <SubProduct>[];
 
+  String get totalSpent {
+    var total = 0;
+    for (final sub in subProducts) {
+      total = total + (sub.totalBought * sub.price);
+    }
+    return total.toString();
+  }
+
+  String get totalGot {
+    var total = 0;
+    for (final sub in subProducts) {
+      total = total + sub.totalSoldPrice;
+    }
+    return total.toString();
+  }
+
+  String get totalProfit {
+    var total = 0;
+    for (final sub in subProducts) {
+      total = total + sub.totalProfit;
+    }
+    return total.toString();
+  }
+
   Product(
     this.name, {
     int? price,
@@ -87,6 +111,8 @@ class SubProduct {
 
     this.createdAt = createdAt ?? DateTime.now().toString();
     this.updatedAt = updatedAt ?? DateTime.now().toString();
+
+    setProfit();
   }
 
   Map<String, Object?> toMap() {
@@ -121,15 +147,20 @@ class SubProduct {
 
   void buy(int count) {
     totalBought = totalBought + count;
-  }
-
-  void sell(int count, int price) {
-    totalSold = totalSold + count;
-    totalSoldPrice = totalSoldPrice + (count * price);
     setProfit();
   }
 
+  void sell(int count, int price) {
+    if (count <= (int.tryParse(currentCount) ?? 0)) {
+      totalSold = totalSold + count;
+      totalSoldPrice = totalSoldPrice + (count * price);
+      setProfit();
+    } else {
+      throw Exception(302);
+    }
+  }
+
   void setProfit() {
-    totalProfit = (totalBought * price) - totalSoldPrice;
+    totalProfit = totalSoldPrice - (totalBought * price);
   }
 }
