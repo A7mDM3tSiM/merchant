@@ -1,7 +1,7 @@
 import '../../main.dart';
 
 class Product {
-  late int id;
+  late String id;
   String name;
 
   late String createdAt;
@@ -42,8 +42,8 @@ class Product {
     String? createdAt,
     String? updatedAt,
   }) {
-    this.id = id ?? (prefs.getInt("id_holder") ?? 0) + 1;
-    prefs.setInt("id_holder", this.id);
+    this.id = (id ?? (prefs.getInt("id_holder") ?? 0) + 1).toString();
+    prefs.setString("id_holder", this.id);
 
     if (subProducts != null) {
       for (final subProduct in subProducts) {
@@ -64,19 +64,19 @@ class Product {
     };
   }
 
-  factory Product.fromMap(Map<String, dynamic> data) {
+  factory Product.fromMap(Map<String, dynamic>? data) {
     return Product(
-      data['name'] ?? "",
-      id: data['id'] ?? 0,
-      createdAt: data['created_at'] ?? "",
-      updatedAt: data['updated_at'] ?? "",
+      data?['name'] ?? "",
+      id: data?['id'] ?? 0,
+      createdAt: data?['created_at'] ?? "",
+      updatedAt: data?['updated_at'] ?? "",
     );
   }
 }
 
 class SubProduct {
-  late int id;
-  int parentId;
+  late String id;
+  String parentId;
   String name;
   int price;
   int totalBought;
@@ -102,8 +102,8 @@ class SubProduct {
     String? createdAt,
     String? updatedAt,
   }) {
-    this.id = id ?? (prefs.getInt("id_holder") ?? 0) + 1;
-    prefs.setInt("id_holder", this.id);
+    this.id = (id ?? (prefs.getInt("id_holder") ?? 0) + 1).toString();
+    prefs.setString("id_holder", this.id);
 
     this.totalSold = totalSold ?? 0;
     this.totalSoldPrice = totalSoldPrice ?? 0;
@@ -130,18 +130,18 @@ class SubProduct {
     };
   }
 
-  factory SubProduct.fromMap(Map<String, dynamic> data) {
+  factory SubProduct.fromMap(Map<String, dynamic>? data) {
     return SubProduct(
-      data['parent_id'] ?? 0,
-      data['name'] ?? "",
-      data['price'] ?? 0,
-      data['total_bought'] ?? 0,
-      id: data['id'] ?? 0,
-      totalSold: data['total_sold'] ?? 0,
-      totalSoldPrice: data['total_sold_price'] ?? 0,
-      totalProfit: data['total_profit'] ?? 0,
-      createdAt: data['created_at'] ?? "",
-      updatedAt: data['updated_at'] ?? "",
+      data?['parent_id'] ?? 0,
+      data?['name'] ?? "",
+      data?['price'] ?? 0,
+      data?['total_bought'] ?? 0,
+      id: data?['id'] ?? 0,
+      totalSold: data?['total_sold'] ?? 0,
+      totalSoldPrice: data?['total_sold_price'] ?? 0,
+      totalProfit: data?['total_profit'] ?? 0,
+      createdAt: data?['created_at'] ?? "",
+      updatedAt: data?['updated_at'] ?? "",
     );
   }
 

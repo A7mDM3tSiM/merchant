@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
@@ -20,6 +21,9 @@ Future<void> main() async {
 
   // Init navigation services
   await NavigationService.init();
+
+  // Init Firebase
+  await Firebase.initializeApp();
 
   // Init Networkservices
   NetworkService.init();

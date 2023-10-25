@@ -123,7 +123,7 @@ class ProductBottomSheetWidget extends StatelessWidget {
 
               if (home.isAllFieldsFilled()) {
                 pro.addSubProduct(
-                  product?.id ?? 0,
+                  product?.id ?? "",
                   pro.getProductIndex(product?.id) ?? 0,
                   home.nameController.text,
                   int.tryParse(home.priceController.text) ?? 0,

@@ -5,7 +5,7 @@ import 'package:merchant/models/product/products_repo.dart';
 import '../models/product/product_model.dart';
 
 class ProductsProvider extends ChangeNotifier {
-  final _repo = ProductRepo();
+  final _repo = ProductRepoFirebase();
   var isLoading = false;
 
   final _products = <Product>[];
@@ -21,12 +21,12 @@ class ProductsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int? getProductIndex(int? id) {
+  int? getProductIndex(String? id) {
     if (id == null) return null;
     return _products.indexWhere((pro) => pro.id == id);
   }
 
-  int? getSubProductIndex(int? parentId, int? id) {
+  int? getSubProductIndex(String? parentId, String? id) {
     if (parentId == null || id == null) return null;
     final parent = _products[getProductIndex(parentId) ?? 0];
 
@@ -57,22 +57,17 @@ class ProductsProvider extends ChangeNotifier {
 
     try {
       final products = await _repo.getProducts();
-      final subProducts = await _repo.getSubProducts();
-      assignSubProductsToProducts(products, subProducts);
+      await assignSubProductsToProducts(products);
     } on Exception catch (e) {
       debugPrint('$e');
     }
     stopLoading();
   }
 
-  void assignSubProductsToProducts(
-      List<Product> products, List<SubProduct> subs) {
+  Future<void> assignSubProductsToProducts(List<Product> products) async {
     for (final product in products) {
-      for (final subP in subs) {
-        if (product.id == subP.parentId) {
-          product.subProducts.add(subP);
-        }
-      }
+      final subPro = await _repo.getSubProducts(product.id);
+      product.subProducts.addAll(subPro);
     }
 
     _products.clear();
@@ -97,13 +92,18 @@ class ProductsProvider extends ChangeNotifier {
       debugPrint('$e');
     }
 
-    addSubProduct(newProduct.id, _products.indexOf(newProduct), name,
-        price ?? 0, totalBought ?? 0);
+    addSubProduct(
+      newProduct.id,
+      _products.indexOf(newProduct),
+      name,
+      price ?? 0,
+      totalBought ?? 0,
+    );
     stopLoading();
   }
 
   Future<void> addSubProduct(
-    int parentId,
+    String parentId,
     int parentIndex,
     String name,
     int price,
@@ -118,7 +118,7 @@ class ProductsProvider extends ChangeNotifier {
       _products[parentIndex].subProducts.add(newSubProduct);
 
       // add the subProduct to the database
-      await _repo.addSubProduct(newSubProduct);
+      await _repo.addSubProduct(parentId, newSubProduct);
 
       // Notify of product added
       Fluttertoast.showToast(
@@ -141,6 +141,7 @@ class ProductsProvider extends ChangeNotifier {
 
       // edit the subproduct in the database
       await _repo.updateSubProduct(
+        _products[productIndex].id,
         _products[productIndex].subProducts[subProductIndex],
       );
       // Notify of product bought
@@ -164,6 +165,7 @@ class ProductsProvider extends ChangeNotifier {
 
       // edit the subproduct in the database
       await _repo.updateSubProduct(
+        _products[productIndex].id,
         _products[productIndex].subProducts[subProductIndex],
       );
 
@@ -225,7 +227,7 @@ class ProductsProvider extends ChangeNotifier {
       _products[productIndex].subProducts.removeAt(subProductIndex);
 
       // delete the subproduct in the database
-      await _repo.deleteSubProduct(id);
+      await _repo.deleteSubProduct(_products[productIndex].id, id);
 
       // Notify of subProduct delete if isAfterProductDelete = false
       if (!isAfterProductDelete) {

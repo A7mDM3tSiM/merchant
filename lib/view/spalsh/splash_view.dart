@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:merchant/components/routes/routes.dart';
-import 'package:merchant/provider/products_provider.dart';
-import 'package:merchant/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/theme/theme_manger.dart';
@@ -17,13 +14,9 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    final pro = context.read<ProductsProvider>();
 
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
-        NavigationService.pushReplacement(Routes.homeRoute);
-        await pro.fecthProducts();
-      },
+      (_) async {},
     );
   }
 

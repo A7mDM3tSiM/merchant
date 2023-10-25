@@ -1,8 +1,10 @@
+import 'package:merchant/main.dart';
 import 'package:merchant/models/product/product_model.dart';
 import 'package:merchant/services/database_service.dart';
+import 'package:merchant/services/firebase_service.dart';
 
 class ProductRepo {
-  // Products
+  // ============== Products =====================
   Future<void> addProduct(Product product) async {
     await DatabaseService().insert("products", product.toMap());
   }
@@ -21,7 +23,7 @@ class ProductRepo {
   Future<void> updateProduct(Product product) async {
     await DatabaseService().updateData(
       "products",
-      product.id,
+      int.tryParse(product.id) ?? 0,
       product.toMap(),
     );
   }
@@ -52,12 +54,89 @@ class ProductRepo {
   Future<void> updateSubProduct(SubProduct subProduct) async {
     await DatabaseService().updateData(
       "sub_products",
-      subProduct.id,
+      int.tryParse(subProduct.id) ?? 0,
       subProduct.toMap(),
     );
   }
 
   Future<void> deleteSubProduct(int id) async {
     await DatabaseService().delete("sub_products", id);
+  }
+}
+
+class ProductRepoFirebase {
+  late final FirebaseService _fb;
+
+  ProductRepoFirebase() {
+    final id = prefs.getString("userId");
+    _fb = FirebaseService(collectionPath: "users/$id/products");
+  }
+
+  // ============== Products =====================
+  Future<void> addProduct(Product product) async {
+    await _fb.addDoc(product.toMap());
+  }
+
+  Future<List<Product>> getProducts() async {
+    final list = <Product>[];
+
+    // get the products from the database
+    final productMapList = await _fb.getCollectionDocs();
+
+    // convert the products from map to Prodcut object
+    for (final pro in productMapList) {
+      list.add(Product.fromMap(pro));
+    }
+
+    return list;
+  }
+
+  Future<void> updateProduct(String productId, Product product) async {
+    await _fb.updateDocData(productId, product.toMap());
+  }
+
+  Future<void> deleteProduct(String productId) async {
+    await _fb.deleteDoc(productId);
+  }
+
+  // ============== Sub Products =====================
+  Future<void> addSubProduct(String parentId, SubProduct subProduct) async {
+    final userId = prefs.getString("userId");
+    final fb = FirebaseService(
+        collectionPath: "users/$userId/products/$parentId/sub_products");
+
+    await fb.addDoc(subProduct.toMap());
+  }
+
+  Future<List<SubProduct>> getSubProducts(String parentId) async {
+    final list = <SubProduct>[];
+    final userId = prefs.getString("userId");
+    final fb = FirebaseService(
+        collectionPath: "users/$userId/products/$parentId/sub_products");
+
+    // get the sub_products from the database
+    final subProductMapList = await fb.getCollectionDocs();
+    for (final sub in subProductMapList) {
+      // convert the sub_products from map to SubProdcut object
+      list.add(SubProduct.fromMap(sub));
+    }
+
+    return list;
+  }
+
+  Future<void> updateSubProduct(String parentId, SubProduct subProdcut) async {
+    final userId = prefs.getString("userId");
+    final fb = FirebaseService(
+        collectionPath: "users/$userId/products/$parentId/sub_products");
+
+    await fb.updateDocData(subProdcut.id, subProdcut.toMap());
+  }
+
+  Future<void> deleteSubProduct(String parentId, String subProductId) async {
+    final userId = prefs.getString("userId");
+    final fb = FirebaseService(
+        collectionPath: "users/$userId/products/$parentId/sub_products");
+
+    await fb.deleteDoc(subProductId);
   }
 }

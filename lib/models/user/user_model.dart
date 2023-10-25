@@ -1,19 +1,15 @@
 class User {
-  int id;
+  String id;
   String name;
   String password;
-
-  late String createdAt;
-  late String updatedAt;
 
   User(
     this.id,
     this.name,
-    this.password, {
-    String? createdAt,
-    String? updatedAt,
-  }) {
-    this.createdAt = createdAt ?? DateTime.now().toString();
-    this.updatedAt = updatedAt ?? DateTime.now().toString();
+    this.password,
+  );
+
+  factory User.fromMap(Map<String, dynamic>? data) {
+    return User(data?['id'], data?['name'], data?['password']);
   }
 }
