@@ -12,8 +12,9 @@ class FirebaseService {
   }
 
   /// Add a doc to the [collectionPath] specified in the class constructor
-  Future<void> addDoc(Map<String, dynamic> data) async {
-    await _fb.add(data);
+  Future<String> addDoc(Map<String, dynamic> data) async {
+    final docData = await _fb.add(data);
+    return docData.id;
   }
 
   /// Gets the fields of a doc by it's [path]

@@ -1,15 +1,22 @@
 class User {
   String id;
-  String name;
+  String username;
+  String storename;
   String password;
 
-  User(
-    this.id,
-    this.name,
-    this.password,
-  );
+  User({
+    required this.id,
+    required this.username,
+    required this.storename,
+    required this.password,
+  });
 
   factory User.fromMap(Map<String, dynamic>? data) {
-    return User(data?['id'], data?['name'], data?['password']);
+    return User(
+      id: data?['id'],
+      username: data?['username'],
+      storename: data?['storename'],
+      password: data?['password'],
+    );
   }
 }

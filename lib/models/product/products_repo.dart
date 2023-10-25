@@ -73,8 +73,14 @@ class ProductRepoFirebase {
   }
 
   // ============== Products =====================
-  Future<void> addProduct(Product product) async {
-    await _fb.addDoc(product.toMap());
+  /// Add the product to the database and return it's path
+  Future<String> addProduct(Product product) async {
+    // add the product to the database and get the doc path
+    final proId = await _fb.addDoc(product.toMap());
+
+    // set the path as the product id and return it
+    await _fb.updateDocData(proId, {"id": proId});
+    return proId;
   }
 
   Future<List<Product>> getProducts() async {
@@ -100,12 +106,17 @@ class ProductRepoFirebase {
   }
 
   // ============== Sub Products =====================
-  Future<void> addSubProduct(String parentId, SubProduct subProduct) async {
+  Future<String> addSubProduct(String parentId, SubProduct subProduct) async {
     final userId = prefs.getString("userId");
     final fb = FirebaseService(
         collectionPath: "users/$userId/products/$parentId/sub_products");
 
-    await fb.addDoc(subProduct.toMap());
+    // Add the subProduct to the database and get it's doc path
+    final subProId = await fb.addDoc(subProduct.toMap());
+
+    // update the doc path to become the subProduct id and return it
+    await fb.updateDocData(parentId, {"id": subProId});
+    return subProId;
   }
 
   Future<List<SubProduct>> getSubProducts(String parentId) async {

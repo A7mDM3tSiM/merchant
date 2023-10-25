@@ -1,5 +1,3 @@
-import '../../main.dart';
-
 class Product {
   late String id;
   String name;
@@ -8,6 +6,8 @@ class Product {
   late String updatedAt;
 
   final subProducts = <SubProduct>[];
+
+  set setId(String id) => this.id = id;
 
   String get totalSpent {
     var total = 0;
@@ -42,9 +42,6 @@ class Product {
     String? createdAt,
     String? updatedAt,
   }) {
-    this.id = (id ?? (prefs.getInt("id_holder") ?? 0) + 1).toString();
-    prefs.setString("id_holder", this.id);
-
     if (subProducts != null) {
       for (final subProduct in subProducts) {
         this.subProducts.add(subProduct);
@@ -90,6 +87,8 @@ class SubProduct {
 
   String get currentCount => (totalBought - totalSold).toString();
 
+  set setId(String id) => this.id = id;
+
   SubProduct(
     this.parentId,
     this.name,
@@ -102,9 +101,6 @@ class SubProduct {
     String? createdAt,
     String? updatedAt,
   }) {
-    this.id = (id ?? (prefs.getInt("id_holder") ?? 0) + 1).toString();
-    prefs.setString("id_holder", this.id);
-
     this.totalSold = totalSold ?? 0;
     this.totalSoldPrice = totalSoldPrice ?? 0;
     this.totalProfit = totalProfit ?? 0;

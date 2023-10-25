@@ -83,11 +83,12 @@ class ProductsProvider extends ChangeNotifier {
 
     final newProduct = Product(name, price: price, totalBought: totalBought);
     try {
-      // add the product to current products list
-      _products.add(newProduct);
+      // add the product to the database and get it's path to assign as an Id
+      final proId = await _repo.addProduct(newProduct);
 
-      // add the product to the database
-      await _repo.addProduct(newProduct);
+      // assign the path as id and add the product to current products list
+      newProduct.setId = proId;
+      _products.add(newProduct);
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -114,11 +115,12 @@ class ProductsProvider extends ChangeNotifier {
     final newSubProduct = SubProduct(parentId, name, price, totalBought);
 
     try {
-      // add the subProduct to current products list
-      _products[parentIndex].subProducts.add(newSubProduct);
+      // add the subProduct to the database and get it's path to assign it as id
+      final subProId = await _repo.addSubProduct(parentId, newSubProduct);
 
-      // add the subProduct to the database
-      await _repo.addSubProduct(parentId, newSubProduct);
+      // assign the path as Id and add the subProduct to current products list
+      newSubProduct.setId = subProId;
+      _products[parentIndex].subProducts.add(newSubProduct);
 
       // Notify of product added
       Fluttertoast.showToast(

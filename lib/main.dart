@@ -10,7 +10,6 @@ import 'components/routes/routes.dart';
 import 'components/theme/theme.dart';
 import 'components/theme/theme_manger.dart';
 import 'services/navigation_service.dart';
-import 'services/network_service.dart';
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 late SharedPreferences prefs;
@@ -24,9 +23,6 @@ Future<void> main() async {
 
   // Init Firebase
   await Firebase.initializeApp();
-
-  // Init Networkservices
-  NetworkService.init();
 
   // Init SharedPreferences
   prefs = await SharedPreferences.getInstance();
