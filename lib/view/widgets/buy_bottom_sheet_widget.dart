@@ -123,14 +123,17 @@ class BuyBottomSheetWidget extends StatelessWidget {
               final pro = context.read<ProductsProvider>();
               final home = context.read<HomeProvider>();
 
-              if (home.isAllFieldsFilled()) {
-                await pro.buySubProduct(
-                  pro.getProductIndex(subProduct.parentId) ?? 0,
-                  pro.getSubProductIndex(subProduct.parentId, subProduct.id) ??
-                      0,
-                  int.tryParse(home.countController.text) ?? 0,
-                );
-                home.closeBottomSheet();
+              if (!pro.isLoading) {
+                if (home.isAllFieldsFilled()) {
+                  await pro.buySubProduct(
+                    pro.getProductIndex(subProduct.parentId) ?? 0,
+                    pro.getSubProductIndex(
+                            subProduct.parentId, subProduct.id) ??
+                        0,
+                    int.tryParse(home.countController.text) ?? 0,
+                  );
+                  home.closeBottomSheet();
+                }
               }
             },
           ),

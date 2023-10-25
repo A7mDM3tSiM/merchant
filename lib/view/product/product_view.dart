@@ -143,10 +143,18 @@ class ProductView extends StatelessWidget {
               SizedBox(
                 height: h * 0.525,
                 child: Consumer<ProductsProvider>(
-                  builder: (_, __, ___) => ListView.builder(
+                  builder: (_, pro, ___) => ListView.builder(
                     shrinkWrap: true,
                     itemCount: args.product?.subProducts.length,
                     itemBuilder: (_, index) {
+                      if (pro.isLoading) {
+                        return Column(
+                          children: [
+                            SizedBox(height: h * 0.2),
+                            const CircularProgressIndicator(),
+                          ],
+                        );
+                      }
                       if (args.product != null &&
                           args.product!.subProducts.isNotEmpty) {
                         return SubProductWidget(

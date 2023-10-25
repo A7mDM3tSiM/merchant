@@ -115,17 +115,19 @@ class HomeBottomSheetWidget extends StatelessWidget {
           ),
           SizedBox(height: h * 0.03),
           ConfirmButton(
-            onTap: () {
+            onTap: () async {
               final pro = context.read<ProductsProvider>();
               final home = context.read<HomeProvider>();
 
-              if (home.isAllFieldsFilled()) {
-                pro.addProduct(
-                  home.nameController.text,
-                  price: int.tryParse(home.priceController.text),
-                  totalBought: int.tryParse(home.countController.text),
-                );
-                home.closeBottomSheet();
+              if (!pro.isLoading) {
+                if (home.isAllFieldsFilled()) {
+                  await pro.addProduct(
+                    home.nameController.text,
+                    price: int.tryParse(home.priceController.text),
+                    totalBought: int.tryParse(home.countController.text),
+                  );
+                  home.closeBottomSheet();
+                }
               }
             },
           ),

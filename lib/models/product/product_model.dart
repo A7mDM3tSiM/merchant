@@ -36,12 +36,16 @@ class Product {
   Product(
     this.name, {
     int? price,
-    int? id,
+    String? id,
     int? totalBought,
     List<SubProduct>? subProducts,
     String? createdAt,
     String? updatedAt,
   }) {
+    if (id != null) {
+      this.id = id;
+    }
+
     if (subProducts != null) {
       for (final subProduct in subProducts) {
         this.subProducts.add(subProduct);
@@ -54,7 +58,6 @@ class Product {
 
   Map<String, Object?> toMap() {
     return {
-      'id': id,
       'name': name,
       'created_at': createdAt,
       'updated_at': updatedAt,
@@ -64,7 +67,7 @@ class Product {
   factory Product.fromMap(Map<String, dynamic>? data) {
     return Product(
       data?['name'] ?? "",
-      id: data?['id'] ?? 0,
+      id: data?['id'] ?? "",
       createdAt: data?['created_at'] ?? "",
       updatedAt: data?['updated_at'] ?? "",
     );
@@ -94,13 +97,17 @@ class SubProduct {
     this.name,
     this.price,
     this.totalBought, {
-    int? id,
+    String? id,
     int? totalSold,
     int? totalSoldPrice,
     int? totalProfit,
     String? createdAt,
     String? updatedAt,
   }) {
+    if (id != null) {
+      this.id = id;
+    }
+
     this.totalSold = totalSold ?? 0;
     this.totalSoldPrice = totalSoldPrice ?? 0;
     this.totalProfit = totalProfit ?? 0;
@@ -113,7 +120,6 @@ class SubProduct {
 
   Map<String, Object?> toMap() {
     return {
-      'id': id,
       'parent_id': parentId,
       'name': name,
       'price': price,
@@ -132,7 +138,7 @@ class SubProduct {
       data?['name'] ?? "",
       data?['price'] ?? 0,
       data?['total_bought'] ?? 0,
-      id: data?['id'] ?? 0,
+      id: data?['id'] ?? "",
       totalSold: data?['total_sold'] ?? 0,
       totalSoldPrice: data?['total_sold_price'] ?? 0,
       totalProfit: data?['total_profit'] ?? 0,

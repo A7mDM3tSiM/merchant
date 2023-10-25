@@ -68,7 +68,7 @@ class ProductRepoFirebase {
   late final FirebaseService _fb;
 
   ProductRepoFirebase() {
-    final id = prefs.getString("userId");
+    final id = prefs.getString("user_id");
     _fb = FirebaseService(collectionPath: "users/$id/products");
   }
 
@@ -107,7 +107,7 @@ class ProductRepoFirebase {
 
   // ============== Sub Products =====================
   Future<String> addSubProduct(String parentId, SubProduct subProduct) async {
-    final userId = prefs.getString("userId");
+    final userId = prefs.getString("user_id");
     final fb = FirebaseService(
         collectionPath: "users/$userId/products/$parentId/sub_products");
 
@@ -115,13 +115,13 @@ class ProductRepoFirebase {
     final subProId = await fb.addDoc(subProduct.toMap());
 
     // update the doc path to become the subProduct id and return it
-    await fb.updateDocData(parentId, {"id": subProId});
+    await fb.updateDocData(subProId, {"id": subProId});
     return subProId;
   }
 
   Future<List<SubProduct>> getSubProducts(String parentId) async {
     final list = <SubProduct>[];
-    final userId = prefs.getString("userId");
+    final userId = prefs.getString("user_id");
     final fb = FirebaseService(
         collectionPath: "users/$userId/products/$parentId/sub_products");
 
@@ -136,7 +136,7 @@ class ProductRepoFirebase {
   }
 
   Future<void> updateSubProduct(String parentId, SubProduct subProdcut) async {
-    final userId = prefs.getString("userId");
+    final userId = prefs.getString("user_id");
     final fb = FirebaseService(
         collectionPath: "users/$userId/products/$parentId/sub_products");
 
@@ -144,7 +144,7 @@ class ProductRepoFirebase {
   }
 
   Future<void> deleteSubProduct(String parentId, String subProductId) async {
-    final userId = prefs.getString("userId");
+    final userId = prefs.getString("user_id");
     final fb = FirebaseService(
         collectionPath: "users/$userId/products/$parentId/sub_products");
 

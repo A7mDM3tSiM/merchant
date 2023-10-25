@@ -6,8 +6,22 @@ import 'package:provider/provider.dart';
 
 import '../widgets/home_bottom_sheet_widget.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final pro = context.read<ProductsProvider>();
+      pro.fecthProducts();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,9 @@ ThemeData lightTheme = ThemeData(
       color: Colors.white,
     ),
   ),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color: Colors.black,
+  ),
   colorScheme: const ColorScheme(
     background: Colors.white,
     brightness: Brightness.light,

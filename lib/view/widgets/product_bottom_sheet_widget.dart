@@ -117,19 +117,21 @@ class ProductBottomSheetWidget extends StatelessWidget {
           ),
           SizedBox(height: h * 0.03),
           ConfirmButton(
-            onTap: () {
+            onTap: () async {
               final pro = context.read<ProductsProvider>();
               final home = context.read<HomeProvider>();
 
-              if (home.isAllFieldsFilled()) {
-                pro.addSubProduct(
-                  product?.id ?? "",
-                  pro.getProductIndex(product?.id) ?? 0,
-                  home.nameController.text,
-                  int.tryParse(home.priceController.text) ?? 0,
-                  int.tryParse(home.countController.text) ?? 0,
-                );
-                home.closeBottomSheet();
+              if (!pro.isLoading) {
+                if (home.isAllFieldsFilled()) {
+                  await pro.addSubProduct(
+                    product?.id ?? "",
+                    pro.getProductIndex(product?.id) ?? 0,
+                    home.nameController.text,
+                    int.tryParse(home.priceController.text) ?? 0,
+                    int.tryParse(home.countController.text) ?? 0,
+                  );
+                  home.closeBottomSheet();
+                }
               }
             },
           ),

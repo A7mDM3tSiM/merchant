@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:merchant/provider/auth_provider.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
 import 'package:merchant/services/database_service.dart';
@@ -42,21 +43,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeManegerProvider>(
+        ChangeNotifierProvider(
           create: (_) => ThemeManegerProvider(),
         ),
-        ChangeNotifierProvider<HomeProvider>(
+        ChangeNotifierProvider(
           create: (_) => HomeProvider(),
         ),
-        ChangeNotifierProvider<ProductsProvider>(
+        ChangeNotifierProvider(
           create: (_) => ProductsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
         ),
       ],
       child: Consumer<ThemeManegerProvider>(
-        builder: (context, theme, _) {
+        builder: (_, theme, __) {
           return MaterialApp(
             routes: Routes.routes,
-            initialRoute: Routes.splashRoute,
+            initialRoute: Routes.wrapperRpute,
             scaffoldMessengerKey: scaffoldMessengerKey,
             navigatorKey: NavigationService.navKey,
             theme: lightTheme,
