@@ -15,7 +15,7 @@ class ReportItemWidget extends StatelessWidget {
     final w = MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: w * 0.025, vertical: h * 0.01),
-      margin: EdgeInsets.symmetric(vertical: h * 0.01),
+      margin: EdgeInsets.symmetric(horizontal: w * 0.015, vertical: h * 0.01),
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
         borderRadius: BorderRadius.circular(10),
@@ -32,6 +32,7 @@ class ReportItemWidget extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+          SizedBox(height: h * 0.01),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -65,13 +66,15 @@ class ReportItemWidget extends StatelessWidget {
               ),
             ],
           ),
-          Column(
+          SizedBox(height: h * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text("Profits"),
-              Text(profit().toString()),
+              Text("Profits: ${profit().toString()}"),
             ],
           ),
+          SizedBox(height: h * 0.01),
         ],
       ),
     );

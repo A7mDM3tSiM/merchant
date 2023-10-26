@@ -25,7 +25,7 @@ class ReportRepo {
 
   Future<String> addReportItem(ReportItem reportItem) async {
     final reportItemId = await _fb.addDoc(reportItem.toMap());
-    await _fb.updateDocData(reportItemId, {'id': reportItem});
+    await _fb.updateDocData(reportItemId, {'id': reportItemId});
     return reportItemId;
   }
 

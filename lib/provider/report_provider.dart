@@ -25,6 +25,8 @@ class ReportProvider extends ChangeNotifier {
 
     final reportRepo = ReportRepo(month);
     final report = await reportRepo.getReport();
+
+    _report.clear();
     _report.addAll(report);
 
     stopLoading();

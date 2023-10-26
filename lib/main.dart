@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:merchant/provider/auth_provider.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
+import 'package:merchant/provider/report_provider.dart';
 import 'package:merchant/services/database_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,6 +55,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ReportProvider(),
         ),
       ],
       child: Consumer<ThemeManegerProvider>(

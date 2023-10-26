@@ -1,3 +1,4 @@
+import 'package:merchant/view/report/report_view.dart';
 import 'package:merchant/wrapper.dart';
 
 import '../../view/home/home_view.dart';
@@ -10,6 +11,7 @@ class Routes {
   static String splashRoute = '/splash';
   static String homeRoute = '/home';
   static String productRoute = '/product';
+  static String reportRoute = '/report';
 
   /// a set contain all the app routes assigned to widgets
   // (_) is context but it's not needed
@@ -18,5 +20,6 @@ class Routes {
     splashRoute: (_) => const SplashView(),
     homeRoute: (_) => const HomeView(),
     productRoute: (_) => const ProductView(),
+    reportRoute: (_) => const ReportView(),
   };
 }

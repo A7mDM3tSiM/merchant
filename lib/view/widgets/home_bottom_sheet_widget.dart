@@ -135,7 +135,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                     productId: proId,
                     name: pro.getProductById(proId).name,
                     totalBoughtCount: totalBought,
-                    totalBoughtPrice: (hashCode * price),
+                    totalBoughtPrice: (totalBought * price),
                     totalSoldCount: 0,
                     totalSoldPrice: 0,
                   );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:merchant/components/routes/routes.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
+import 'package:merchant/services/navigation_service.dart';
 import 'package:merchant/view/widgets/product_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +36,15 @@ class _HomeViewState extends State<HomeView> {
           "Market Name",
           style: TextStyle(color: Colors.black, fontSize: h * 0.023),
         ),
-        leading: const SizedBox(),
+        leading: GestureDetector(
+          onTap: () {
+            NavigationService.push(Routes.reportRoute);
+          },
+          child: const Icon(
+            Icons.receipt_long_rounded,
+            color: Colors.black,
+          ),
+        ),
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0.0,
