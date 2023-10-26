@@ -37,6 +37,7 @@ class AuthProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "ادخل اسم المستخدم أولا",
         backgroundColor: Colors.red,
+        fontSize: 20,
       );
       return false;
     }
@@ -44,6 +45,7 @@ class AuthProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "اخل كلمة المرور أولا",
         backgroundColor: Colors.red,
+        fontSize: 20,
       );
       return false;
     }
@@ -63,6 +65,7 @@ class AuthProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "تم تسجيل الدخول بنجاح",
         backgroundColor: Colors.green,
+        fontSize: 20,
       );
     }
 

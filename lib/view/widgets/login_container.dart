@@ -51,6 +51,7 @@ class LoginConatinerWidget extends StatelessWidget {
                       ),
                       child: TextField(
                         controller: login.usernameController,
+                        textDirection: TextDirection.rtl,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: h * 0.02,
@@ -60,6 +61,7 @@ class LoginConatinerWidget extends StatelessWidget {
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: w * 0.025),
                           hintText: "اسم المستخدم",
+                          hintTextDirection: TextDirection.rtl,
                           hintStyle: const TextStyle(
                             color: Colors.grey,
                           ),
@@ -88,6 +90,7 @@ class LoginConatinerWidget extends StatelessWidget {
                       ),
                       child: TextField(
                         controller: login.passwordController,
+                        textDirection: TextDirection.rtl,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: h * 0.02,
@@ -97,6 +100,7 @@ class LoginConatinerWidget extends StatelessWidget {
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: w * 0.025),
                           hintText: "كلمة المرور",
+                          hintTextDirection: TextDirection.rtl,
                           hintStyle: const TextStyle(
                             color: Colors.grey,
                           ),

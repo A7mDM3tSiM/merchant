@@ -57,7 +57,12 @@ class ProductBottomSheetWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: w * 0.05),
-              const Text("اسم السلعة"),
+              Text(
+                "اسم السلعة",
+                style: TextStyle(
+                  fontSize: h * 0.017,
+                ),
+              ),
             ],
           ),
           SizedBox(height: h * 0.03),
@@ -86,7 +91,12 @@ class ProductBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("عدد الحبات"),
+                  Text(
+                    "عدد الحبات",
+                    style: TextStyle(
+                      fontSize: h * 0.017,
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -111,7 +121,12 @@ class ProductBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("سعر حبة"),
+                  Text(
+                    "سعر حبة",
+                    style: TextStyle(
+                      fontSize: h * 0.017,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -125,6 +140,8 @@ class ProductBottomSheetWidget extends StatelessWidget {
 
               if (!pro.isLoading) {
                 if (home.isAllFieldsFilled()) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+
                   await pro.addSubProduct(
                     product?.id ?? "",
                     pro.getProductIndex(product?.id) ?? 0,

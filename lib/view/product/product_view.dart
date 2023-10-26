@@ -77,6 +77,9 @@ class ProductView extends StatelessWidget {
                         Consumer<ProductsProvider>(
                           builder: (_, __, ___) => Text(
                             args.product?.totalProfit.toString() ?? "",
+                            style: TextStyle(
+                              fontSize: h * 0.018,
+                            ),
                           ),
                         ),
                       ],
@@ -101,6 +104,9 @@ class ProductView extends StatelessWidget {
                         Consumer<ProductsProvider>(
                           builder: (_, __, ___) => Text(
                             args.product?.totalSoldPrice.toString() ?? "",
+                            style: TextStyle(
+                              fontSize: h * 0.018,
+                            ),
                           ),
                         ),
                       ],
@@ -124,7 +130,11 @@ class ProductView extends StatelessWidget {
                         ),
                         Consumer<ProductsProvider>(
                           builder: (_, __, ___) => Text(
-                              args.product?.totalBoughtPrice.toString() ?? ""),
+                            args.product?.totalBoughtPrice.toString() ?? "",
+                            style: TextStyle(
+                              fontSize: h * 0.018,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -164,7 +174,14 @@ class ProductView extends StatelessWidget {
                       return Column(
                         children: [
                           SizedBox(height: h * 0.2),
-                          const Center(child: Text("لا توجد منتجات")),
+                          Center(
+                            child: Text(
+                              "لا توجد منتجات",
+                              style: TextStyle(
+                                fontSize: h * 0.023,
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     },

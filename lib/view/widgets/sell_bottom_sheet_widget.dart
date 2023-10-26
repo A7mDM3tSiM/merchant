@@ -58,7 +58,12 @@ class SellBottomSheetWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: w * 0.05),
-              const Text("اسم السلعة"),
+              Text(
+                "اسم السلعة",
+                style: TextStyle(
+                  fontSize: h * 0.017,
+                ),
+              ),
             ],
           ),
           SizedBox(height: h * 0.03),
@@ -87,7 +92,12 @@ class SellBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("عدد الحبات"),
+                  Text(
+                    "عدد الحبات",
+                    style: TextStyle(
+                      fontSize: h * 0.017,
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -112,7 +122,12 @@ class SellBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("سعر حبة"),
+                  Text(
+                    "سعر حبة",
+                    style: TextStyle(
+                      fontSize: h * 0.017,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -126,6 +141,8 @@ class SellBottomSheetWidget extends StatelessWidget {
 
               if (!pro.isLoading) {
                 if (home.isAllFieldsFilled()) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+
                   await pro.sellSubProduct(
                     pro.getProductIndex(subProduct.parentId) ?? 0,
                     pro.getSubProductIndex(

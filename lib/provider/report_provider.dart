@@ -27,7 +27,7 @@ class ReportProvider extends ChangeNotifier {
     final report = await reportRepo.getReport();
 
     _report.clear();
-    _report.addAll(report);
+    _report.addAll(report.reversed);
 
     stopLoading();
   }

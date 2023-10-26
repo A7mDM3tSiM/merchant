@@ -75,7 +75,7 @@ class ProductsProvider extends ChangeNotifier {
     }
 
     _products.clear();
-    _products.addAll(products);
+    _products.addAll(products.reversed);
   }
 
   Future<String> addProduct(
@@ -126,6 +126,7 @@ class ProductsProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "تمت اضافة منتج جديد",
         backgroundColor: Colors.green,
+        fontSize: 20,
       );
     } on Exception catch (e) {
       debugPrint('$e');
@@ -150,6 +151,7 @@ class ProductsProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "تمت اضافة منتج جديد",
         backgroundColor: Colors.green,
+        fontSize: 20,
       );
     } on Exception catch (e) {
       debugPrint('$e');
@@ -175,6 +177,7 @@ class ProductsProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "نم بيع المنتج",
         backgroundColor: Colors.green,
+        fontSize: 20,
       );
     } on Exception catch (e) {
       debugPrint('$e');
@@ -183,6 +186,7 @@ class ProductsProvider extends ChangeNotifier {
         Fluttertoast.showToast(
           msg: "تجاوزت عدد المنتجات الذي تملكه",
           backgroundColor: Colors.red,
+          fontSize: 20,
         );
       }
     }
@@ -209,6 +213,7 @@ class ProductsProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "تم مسح المنتح",
         backgroundColor: Colors.green,
+        fontSize: 20,
       );
     } on Exception catch (e) {
       debugPrint('$e');
@@ -236,6 +241,7 @@ class ProductsProvider extends ChangeNotifier {
         Fluttertoast.showToast(
           msg: "تم مسح المنتح",
           backgroundColor: Colors.green,
+          fontSize: 20,
         );
       }
     } on Exception catch (e) {

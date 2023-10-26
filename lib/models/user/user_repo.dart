@@ -22,6 +22,7 @@ class UserRepo {
         Fluttertoast.showToast(
           msg: "كلمة المرور غير صحيحة",
           backgroundColor: Colors.red,
+          fontSize: 20,
         );
         return null;
       }
@@ -29,6 +30,7 @@ class UserRepo {
       Fluttertoast.showToast(
         msg: "اسم المستخدم غير صحيح",
         backgroundColor: Colors.red,
+        fontSize: 20,
       );
       return null;
     }

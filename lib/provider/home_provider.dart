@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeProvider extends ChangeNotifier {
+  DateTime willPop = DateTime.now();
+
   final nameController = TextEditingController();
   final countController = TextEditingController();
   final priceController = TextEditingController();
@@ -9,6 +12,26 @@ class HomeProvider extends ChangeNotifier {
 
   PersistentBottomSheetController? controller;
   bool isBottomSheetOpened = false;
+
+  Future<bool> onWillpop() async {
+    var onPress = DateTime.now();
+    var diffrance = onPress.difference(willPop).inSeconds;
+
+    if (diffrance > 2) {
+      Fluttertoast.showToast(
+        msg: "اضغط مرة اخري للخروج من التطبيق",
+        backgroundColor: Colors.grey,
+        fontSize: 20,
+      );
+      return Future.value(false);
+    } else {
+      await SystemChannels.platform.invokeMethod<void>(
+        'SystemNavigator.pop',
+        false,
+      );
+      return Future.value(false);
+    }
+  }
 
   bool isAllFieldsFilled() {
     if (nameController.text.isEmpty ||
@@ -18,6 +41,7 @@ class HomeProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: "قم بملء جميع الحقول",
         backgroundColor: Colors.red,
+        fontSize: 20,
       );
       return false;
     }

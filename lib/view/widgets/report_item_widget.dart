@@ -39,29 +39,69 @@ class ReportItemWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("الداخل"),
-                  Text(reportItem.totalBoughtCount.toString()),
+                  Text(
+                    "الداخل",
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
+                  Text(
+                    reportItem.totalBoughtCount.toString(),
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("الخارج"),
-                  Text(reportItem.totalSoldCount.toString()),
+                  Text(
+                    "الخارج",
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
+                  Text(
+                    reportItem.totalSoldCount.toString(),
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("سعر الداخل"),
-                  Text(reportItem.totalBoughtPrice.toString()),
+                  Text(
+                    "سعر الداخل",
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
+                  Text(
+                    reportItem.totalBoughtPrice.toString(),
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("سعر الخارج"),
-                  Text(reportItem.totalSoldPrice.toString()),
+                  Text(
+                    "سعر الخارج",
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
+                  Text(
+                    reportItem.totalSoldPrice.toString(),
+                    style: TextStyle(
+                      fontSize: h * 0.018,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -71,7 +111,12 @@ class ReportItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("${profit().toString()} :الارباح"),
+              Text(
+                "${profit().toString()} :الارباح",
+                style: TextStyle(
+                  fontSize: h * 0.018,
+                ),
+              ),
             ],
           ),
           SizedBox(height: h * 0.01),

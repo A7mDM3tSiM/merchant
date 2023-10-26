@@ -55,7 +55,12 @@ class HomeBottomSheetWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: w * 0.05),
-              const Text("اسم السلعة"),
+              Text(
+                "اسم السلعة",
+                style: TextStyle(
+                  fontSize: h * 0.017,
+                ),
+              ),
             ],
           ),
           SizedBox(height: h * 0.03),
@@ -84,7 +89,12 @@ class HomeBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("عدد الحبات"),
+                  Text(
+                    "عدد الحبات",
+                    style: TextStyle(
+                      fontSize: h * 0.017,
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -109,7 +119,12 @@ class HomeBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("سعر حبة"),
+                  Text(
+                    "سعر حبة",
+                    style: TextStyle(
+                      fontSize: h * 0.017,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -122,10 +137,12 @@ class HomeBottomSheetWidget extends StatelessWidget {
               final report = context.read<ReportProvider>();
 
               if (!pro.isLoading) {
-                final price = int.tryParse(home.priceController.text) ?? 0;
-                final totalBought =
-                    int.tryParse(home.countController.text) ?? 0;
                 if (home.isAllFieldsFilled()) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+
+                  final price = int.tryParse(home.priceController.text) ?? 0;
+                  final totalBought =
+                      int.tryParse(home.countController.text) ?? 0;
                   final proId = await pro.addProduct(
                     home.nameController.text,
                     price: int.tryParse(home.priceController.text),

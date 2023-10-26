@@ -57,7 +57,12 @@ class ProductWidget extends StatelessWidget {
                 Icons.arrow_back_ios,
                 color: Colors.grey,
               ),
-              Text(product.name),
+              Text(
+                product.name,
+                style: TextStyle(
+                  fontSize: h * 0.02,
+                ),
+              ),
             ],
           ),
         ),

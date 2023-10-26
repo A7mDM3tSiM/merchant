@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:merchant/main.dart';
 import 'package:merchant/provider/auth_provider.dart';
 import 'package:merchant/view/home/home_view.dart';
 import 'package:merchant/view/spalsh/splash_view.dart';
@@ -10,7 +9,6 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    prefs.setString("user_store_name", "My Store");
     return Consumer<AuthProvider>(
       builder: (_, auth, __) {
         if (auth.isLoggedIn) {

@@ -99,8 +99,13 @@ class _ReportViewState extends State<ReportView> {
                 return Column(
                   children: [
                     SizedBox(height: h * 0.45),
-                    const Center(
-                      child: Text("لا توجد منتجات"),
+                    Center(
+                      child: Text(
+                        "لا توجد منتجات",
+                        style: TextStyle(
+                          fontSize: h * 0.023,
+                        ),
+                      ),
                     ),
                   ],
                 );
