@@ -32,7 +32,7 @@ class ConfirmButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "Confirm",
+            "تأكيد",
             style: TextStyle(color: Colors.black, fontSize: h * 0.02),
           ),
         ),

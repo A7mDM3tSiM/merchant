@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchant/components/routes/routes.dart';
+import 'package:merchant/main.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
 import 'package:merchant/services/navigation_service.dart';
@@ -33,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Market Name",
+          prefs.getString("user_store_name") ?? "",
           style: TextStyle(color: Colors.black, fontSize: h * 0.023),
         ),
         leading: GestureDetector(
@@ -118,7 +119,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     SizedBox(height: h * 0.3),
                     const Center(
-                      child: Text("No products"),
+                      child: Text("لا توجد منتجات"),
                     ),
                   ],
                 );

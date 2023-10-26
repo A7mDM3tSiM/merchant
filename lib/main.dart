@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:merchant/provider/auth_provider.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
 import 'package:merchant/provider/report_provider.dart';
-import 'package:merchant/services/database_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +20,9 @@ Future<void> main() async {
   // Global Init
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Easylocalization
+  await EasyLocalization.ensureInitialized();
+
   // Init navigation services
   await NavigationService.init();
 
@@ -29,11 +32,13 @@ Future<void> main() async {
   // Init SharedPreferences
   prefs = await SharedPreferences.getInstance();
 
-  // Init database
-  await DatabaseService.init();
-
   runApp(
-    const MyApp(),
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'translations',
+      fallbackLocale: const Locale('en'),
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -70,7 +75,9 @@ class MyApp extends StatelessWidget {
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: theme.themeMode,
-            locale: const Locale('ar'),
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+            locale: const Locale('en'),
             debugShowCheckedModeBanner: false,
           );
         },

@@ -35,14 +35,14 @@ class AuthProvider extends ChangeNotifier {
   bool validate() {
     if (usernameController.text.isEmpty) {
       Fluttertoast.showToast(
-        msg: "Enter the username first",
+        msg: "ادخل اسم المستخدم أولا",
         backgroundColor: Colors.red,
       );
       return false;
     }
     if (passwordController.text.isEmpty) {
       Fluttertoast.showToast(
-        msg: "Enter the password first",
+        msg: "اخل كلمة المرور أولا",
         backgroundColor: Colors.red,
       );
       return false;
@@ -61,7 +61,7 @@ class AuthProvider extends ChangeNotifier {
       prefs.setString("user_id", user.id);
       prefs.setString("user_store_name", user.storename);
       Fluttertoast.showToast(
-        msg: "Logged in succesfully",
+        msg: "تم تسجيل الدخول بنجاح",
         backgroundColor: Colors.green,
       );
     }

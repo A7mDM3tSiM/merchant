@@ -20,14 +20,14 @@ class UserRepo {
         return User.fromMap(thisUser);
       } else {
         Fluttertoast.showToast(
-          msg: "Wrong password",
+          msg: "كلمة المرور غير صحيحة",
           backgroundColor: Colors.red,
         );
         return null;
       }
     } on StateError {
       Fluttertoast.showToast(
-        msg: "Wrong username",
+        msg: "اسم المستخدم غير صحيح",
         backgroundColor: Colors.red,
       );
       return null;

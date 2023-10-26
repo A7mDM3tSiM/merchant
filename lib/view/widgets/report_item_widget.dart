@@ -39,28 +39,28 @@ class ReportItemWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("Income"),
+                  const Text("الداخل"),
                   Text(reportItem.totalBoughtCount.toString()),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("Outcome"),
+                  const Text("الخارج"),
                   Text(reportItem.totalSoldCount.toString()),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("Income cost"),
+                  const Text("سعر الداخل"),
                   Text(reportItem.totalBoughtPrice.toString()),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("Outcome cost"),
+                  const Text("سعر الخارج"),
                   Text(reportItem.totalSoldPrice.toString()),
                 ],
               ),
@@ -71,7 +71,7 @@ class ReportItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Profits: ${profit().toString()}"),
+              Text("${profit().toString()} :الارباح"),
             ],
           ),
           SizedBox(height: h * 0.01),

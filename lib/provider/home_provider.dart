@@ -16,7 +16,7 @@ class HomeProvider extends ChangeNotifier {
         priceController.text.isEmpty) {
       // Notify of unfilled fields
       Fluttertoast.showToast(
-        msg: "Complete all fields",
+        msg: "قم بملء جميع الحقول",
         backgroundColor: Colors.red,
       );
       return false;

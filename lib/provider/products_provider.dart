@@ -124,7 +124,7 @@ class ProductsProvider extends ChangeNotifier {
 
       // Notify of product added
       Fluttertoast.showToast(
-        msg: "New product added",
+        msg: "تمت اضافة منتج جديد",
         backgroundColor: Colors.green,
       );
     } on Exception catch (e) {
@@ -148,7 +148,7 @@ class ProductsProvider extends ChangeNotifier {
       );
       // Notify of product bought
       Fluttertoast.showToast(
-        msg: "New product added",
+        msg: "تمت اضافة منتج جديد",
         backgroundColor: Colors.green,
       );
     } on Exception catch (e) {
@@ -173,7 +173,7 @@ class ProductsProvider extends ChangeNotifier {
 
       // Notify of product sold
       Fluttertoast.showToast(
-        msg: "Product sold",
+        msg: "نم بيع المنتج",
         backgroundColor: Colors.green,
       );
     } on Exception catch (e) {
@@ -181,7 +181,7 @@ class ProductsProvider extends ChangeNotifier {
       if (e.toString().contains("302")) {
         // Notify of amount excceded
         Fluttertoast.showToast(
-          msg: "Excceded product available amount",
+          msg: "تجاوزت عدد المنتجات الذي تملكه",
           backgroundColor: Colors.red,
         );
       }
@@ -207,7 +207,7 @@ class ProductsProvider extends ChangeNotifier {
 
       // Notify of product delete
       Fluttertoast.showToast(
-        msg: "Product deleted",
+        msg: "تم مسح المنتح",
         backgroundColor: Colors.green,
       );
     } on Exception catch (e) {
@@ -234,7 +234,7 @@ class ProductsProvider extends ChangeNotifier {
       // Notify of subProduct delete if isAfterProductDelete = false
       if (!isAfterProductDelete) {
         Fluttertoast.showToast(
-          msg: "Product deleted",
+          msg: "تم مسح المنتح",
           backgroundColor: Colors.green,
         );
       }

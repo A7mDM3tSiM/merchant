@@ -24,7 +24,7 @@ class LoginConatinerWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Login",
+            "تسجيل دخول",
             style: TextStyle(
               fontSize: h * 0.06,
               color: Colors.black,
@@ -59,7 +59,7 @@ class LoginConatinerWidget extends StatelessWidget {
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: w * 0.025),
-                          hintText: "Username",
+                          hintText: "اسم المستخدم",
                           hintStyle: const TextStyle(
                             color: Colors.grey,
                           ),
@@ -96,7 +96,7 @@ class LoginConatinerWidget extends StatelessWidget {
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: w * 0.025),
-                          hintText: "Password",
+                          hintText: "كلمة المرور",
                           hintStyle: const TextStyle(
                             color: Colors.grey,
                           ),

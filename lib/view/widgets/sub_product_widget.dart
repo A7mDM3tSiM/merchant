@@ -103,7 +103,10 @@ class SubProductWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.025),
-                  Text("${subProduct.currentCount} item"),
+                  Text(
+                    "${subProduct.currentCount} حبة",
+                    textDirection: TextDirection.rtl,
+                  ),
                 ],
               ),
             ),
@@ -112,7 +115,10 @@ class SubProductWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${subProduct.price.toString()} pound"),
+                  Text(
+                    "${subProduct.price.toString()} ج",
+                    textDirection: TextDirection.rtl,
+                  ),
                   Text(subProduct.name),
                 ],
               ),

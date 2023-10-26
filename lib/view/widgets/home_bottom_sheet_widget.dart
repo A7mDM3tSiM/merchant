@@ -38,7 +38,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
             children: [
               Consumer<HomeProvider>(
                 builder: (_, home, __) => Container(
-                  width: w * 0.75,
+                  width: w * 0.7,
                   decoration: const BoxDecoration(
                     border: BorderDirectional(
                       bottom: BorderSide(
@@ -55,7 +55,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: w * 0.05),
-              const Text("Name"),
+              const Text("اسم السلعة"),
             ],
           ),
           SizedBox(height: h * 0.03),
@@ -67,7 +67,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                 children: [
                   Consumer<HomeProvider>(
                     builder: (_, home, __) => Container(
-                      width: w * 0.3,
+                      width: w * 0.2,
                       decoration: const BoxDecoration(
                         border: BorderDirectional(
                           bottom: BorderSide(
@@ -84,7 +84,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("Count"),
+                  const Text("عدد الحبات"),
                 ],
               ),
               Row(
@@ -92,7 +92,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                 children: [
                   Consumer<HomeProvider>(
                     builder: (_, home, __) => Container(
-                      width: w * 0.3,
+                      width: w * 0.2,
                       decoration: const BoxDecoration(
                         border: BorderDirectional(
                           bottom: BorderSide(
@@ -109,7 +109,7 @@ class HomeBottomSheetWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: w * 0.05),
-                  const Text("Price"),
+                  const Text("سعر حبة"),
                 ],
               ),
             ],

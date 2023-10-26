@@ -135,7 +135,7 @@ class ProductView extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'Sub products',
+                  'السلع',
                   style: TextStyle(fontSize: h * 0.023),
                 ),
               ),
@@ -164,7 +164,7 @@ class ProductView extends StatelessWidget {
                       return Column(
                         children: [
                           SizedBox(height: h * 0.2),
-                          const Center(child: Text("No products")),
+                          const Center(child: Text("لا توجد منتجات")),
                         ],
                       );
                     },

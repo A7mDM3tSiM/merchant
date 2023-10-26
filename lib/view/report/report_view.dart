@@ -43,6 +43,7 @@ class _ReportViewState extends State<ReportView> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime(2023),
                         lastDate: DateTime(2050),
+                        locale: const Locale('ar'),
                         builder: (_, child) => Theme(
                             data: Theme.of(context).copyWith(
                               colorScheme: const ColorScheme.light(
@@ -75,7 +76,7 @@ class _ReportViewState extends State<ReportView> {
                     ),
                   ),
                   Text(
-                    "Monthly Report",
+                    "التقرير الشهري",
                     style: TextStyle(
                       fontSize: h * 0.023,
                       color: Colors.black,
@@ -99,7 +100,7 @@ class _ReportViewState extends State<ReportView> {
                   children: [
                     SizedBox(height: h * 0.45),
                     const Center(
-                      child: Text("No products"),
+                      child: Text("لا توجد منتجات"),
                     ),
                   ],
                 );
