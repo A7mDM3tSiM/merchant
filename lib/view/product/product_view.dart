@@ -76,7 +76,7 @@ class ProductView extends StatelessWidget {
                         ),
                         Consumer<ProductsProvider>(
                           builder: (_, __, ___) => Text(
-                            args.product?.totalProfit ?? "",
+                            args.product?.totalProfit.toString() ?? "",
                           ),
                         ),
                       ],
@@ -100,7 +100,7 @@ class ProductView extends StatelessWidget {
                         ),
                         Consumer<ProductsProvider>(
                           builder: (_, __, ___) => Text(
-                            args.product?.totalGot ?? "",
+                            args.product?.totalSoldPrice.toString() ?? "",
                           ),
                         ),
                       ],
@@ -123,8 +123,8 @@ class ProductView extends StatelessWidget {
                           color: Colors.amber,
                         ),
                         Consumer<ProductsProvider>(
-                          builder: (_, __, ___) =>
-                              Text(args.product?.totalSpent ?? ""),
+                          builder: (_, __, ___) => Text(
+                              args.product?.totalBoughtPrice.toString() ?? ""),
                         ),
                       ],
                     ),

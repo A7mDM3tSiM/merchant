@@ -9,28 +9,44 @@ class Product {
 
   set setId(String id) => this.id = id;
 
-  String get totalSpent {
+  int get totalBoughtCount {
+    var total = 0;
+    for (final sub in subProducts) {
+      total = total + sub.totalBought;
+    }
+    return total;
+  }
+
+  int get totalSoldCount {
+    var total = 0;
+    for (final sub in subProducts) {
+      total = total + sub.totalSold;
+    }
+    return total;
+  }
+
+  int get totalBoughtPrice {
     var total = 0;
     for (final sub in subProducts) {
       total = total + (sub.totalBought * sub.price);
     }
-    return total.toString();
+    return total;
   }
 
-  String get totalGot {
+  int get totalSoldPrice {
     var total = 0;
     for (final sub in subProducts) {
       total = total + sub.totalSoldPrice;
     }
-    return total.toString();
+    return total;
   }
 
-  String get totalProfit {
+  int get totalProfit {
     var total = 0;
     for (final sub in subProducts) {
       total = total + sub.totalProfit;
     }
-    return total.toString();
+    return total;
   }
 
   Product(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:merchant/models/product/product_model.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
+import 'package:merchant/provider/report_provider.dart';
 import 'package:merchant/view/widgets/global_confirm_button.dart';
 import 'package:provider/provider.dart';
 
@@ -120,6 +121,7 @@ class ProductBottomSheetWidget extends StatelessWidget {
             onTap: () async {
               final pro = context.read<ProductsProvider>();
               final home = context.read<HomeProvider>();
+              final report = context.read<ReportProvider>();
 
               if (!pro.isLoading) {
                 if (home.isAllFieldsFilled()) {
@@ -130,6 +132,11 @@ class ProductBottomSheetWidget extends StatelessWidget {
                     int.tryParse(home.priceController.text) ?? 0,
                     int.tryParse(home.countController.text) ?? 0,
                   );
+                  // add a buy the report item
+                  report.updateReportItem(product?.id ?? "", {
+                    "total_bought_count": product?.totalBoughtCount,
+                    "total_bought_price": product?.totalBoughtPrice,
+                  });
                   home.closeBottomSheet();
                 }
               }

@@ -21,6 +21,10 @@ class ProductsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Product getProductById(String id) {
+    return _products.where((e) => e.id == id).first;
+  }
+
   int? getProductIndex(String? id) {
     if (id == null) return null;
     return _products.indexWhere((pro) => pro.id == id);
@@ -74,17 +78,17 @@ class ProductsProvider extends ChangeNotifier {
     _products.addAll(products);
   }
 
-  Future<void> addProduct(
+  Future<String> addProduct(
     String name, {
     int? price,
     int? totalBought,
   }) async {
     startLoading();
-
+    late final String? proId;
     final newProduct = Product(name, price: price, totalBought: totalBought);
     try {
       // add the product to the database and get it's path to assign as an Id
-      final proId = await _repo.addProduct(newProduct);
+      proId = await _repo.addProduct(newProduct);
 
       // assign the path as id and add the product to current products list
       newProduct.setId = proId;
@@ -93,13 +97,10 @@ class ProductsProvider extends ChangeNotifier {
       debugPrint('$e');
     }
 
-    await addSubProduct(
-      newProduct.id,
-      _products.indexOf(newProduct),
-      name,
-      price ?? 0,
-      totalBought ?? 0,
-    );
+    await addSubProduct(newProduct.id, _products.indexOf(newProduct), name,
+        price ?? 0, totalBought ?? 0);
+
+    return proId ?? "";
   }
 
   Future<void> addSubProduct(
