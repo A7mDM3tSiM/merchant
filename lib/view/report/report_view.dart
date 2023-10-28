@@ -66,12 +66,20 @@ class _ReportViewState extends State<ReportView> {
                       });
                     },
                     child: Consumer<ReportProvider>(
-                      builder: (_, report, __) => Text(
-                        report.currentMonth,
-                        style: TextStyle(
-                          fontSize: h * 0.023,
-                          color: Colors.black,
-                        ),
+                      builder: (_, report, __) => Row(
+                        children: [
+                          Text(
+                            report.currentMonth,
+                            style: TextStyle(
+                              fontSize: h * 0.023,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black,
+                          )
+                        ],
                       ),
                     ),
                   ),

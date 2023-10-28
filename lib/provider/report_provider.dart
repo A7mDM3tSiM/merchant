@@ -65,4 +65,15 @@ class ReportProvider extends ChangeNotifier {
     await fetchReport(null);
     return _report.where((e) => e.productId == id).first.id;
   }
+
+  Future<bool> isNewMonthReportSet() async {
+    final reportRepo = ReportRepo(null);
+    final report = await reportRepo.getReport();
+
+    if (report.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

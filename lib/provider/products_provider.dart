@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:merchant/models/product/products_repo.dart';
+import 'package:merchant/provider/report_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product/product_model.dart';
 
 class ProductsProvider extends ChangeNotifier {
   final _repo = ProductRepoFirebase();
   var isLoading = false;
+  var isSettingNewReport = false;
 
   final _products = <Product>[];
   List<Product> get products => _products;
@@ -199,19 +202,21 @@ class ProductsProvider extends ChangeNotifier {
 
     try {
       // delete all subProducts from the database
-      for (var i = 0; i <= _products[productIndex].subProducts.length; i++) {
-        await deleteSubProduct(productIndex, i, isAfterProductDelete: true);
+      if (_products[productIndex].subProducts.isNotEmpty) {
+        for (var i = 0; i <= _products[productIndex].subProducts.length; i++) {
+          await deleteSubProduct(productIndex, i, isAfterProductDelete: true);
+        }
       }
 
       // delete from the products list
       _products.removeAt(productIndex);
 
       // delete from the database
-      _repo.deleteProduct(id);
+      await _repo.deleteProduct(id);
 
       // Notify of product delete
       Fluttertoast.showToast(
-        msg: "تم مسح المنتح",
+        msg: "تم حذف المنتح",
         backgroundColor: Colors.green,
         fontSize: 20,
       );
@@ -239,7 +244,7 @@ class ProductsProvider extends ChangeNotifier {
       // Notify of subProduct delete if isAfterProductDelete = false
       if (!isAfterProductDelete) {
         Fluttertoast.showToast(
-          msg: "تم مسح المنتح",
+          msg: "تم حذف المنتح",
           backgroundColor: Colors.green,
           fontSize: 20,
         );
@@ -248,5 +253,28 @@ class ProductsProvider extends ChangeNotifier {
       debugPrint('$e');
     }
     stopLoading();
+  }
+
+  Future<void> setNewMonthReport(BuildContext context) async {
+    final report = context.read<ReportProvider>();
+
+    if (await report.isNewMonthReportSet()) {
+      isSettingNewReport = true;
+      notifyListeners();
+
+      for (final pro in _products) {
+        await report.addReportItem(
+          productId: pro.id,
+          name: pro.name,
+          totalBoughtCount: 0,
+          totalBoughtPrice: 0,
+          totalSoldCount: 0,
+          totalSoldPrice: 0,
+        );
+      }
+    }
+
+    isSettingNewReport = false;
+    notifyListeners();
   }
 }

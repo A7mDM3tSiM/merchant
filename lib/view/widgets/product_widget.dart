@@ -5,6 +5,7 @@ import 'package:merchant/models/product/product_model.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
 import 'package:merchant/services/navigation_service.dart';
+import 'package:merchant/view/widgets/sure_widget.dart';
 import 'package:provider/provider.dart';
 
 class ProductWidget extends StatelessWidget {
@@ -27,44 +28,44 @@ class ProductWidget extends StatelessWidget {
           arg: ProductViewArgs(product),
         );
       },
-      child: Dismissible(
-        key: GlobalKey(),
-        onDismissed: (_) {
-          final pro = context.read<ProductsProvider>();
-          pro.deleteProduct(pro.getProductIndex(product.id) ?? 0);
-        },
-        background: Container(
-          color: Colors.red,
-          child: const Icon(
-            Icons.delete,
-            color: Colors.white,
-          ),
+      child: Container(
+        padding:
+            EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.015),
+        margin: EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.01),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(width: 1, color: Colors.black),
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: Container(
-          padding:
-              EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.015),
-          margin:
-              EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.01),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(width: 1, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(
-                Icons.arrow_back_ios,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                showDialog<bool>(
+                  context: context,
+                  builder: (_) => const SureWidget(),
+                ).then((value) {
+                  if (value != null) {
+                    if (value) {
+                      final pro = context.read<ProductsProvider>();
+                      pro.deleteProduct(pro.getProductIndex(product.id) ?? 0);
+                    }
+                  }
+                });
+              },
+              child: const Icon(
+                Icons.delete,
                 color: Colors.grey,
               ),
-              Text(
-                product.name,
-                style: TextStyle(
-                  fontSize: h * 0.02,
-                ),
+            ),
+            Text(
+              product.name,
+              style: TextStyle(
+                fontSize: h * 0.02,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

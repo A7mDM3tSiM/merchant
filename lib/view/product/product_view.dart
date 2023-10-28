@@ -46,7 +46,7 @@ class ProductView extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: w * 0.05),
+          padding: EdgeInsets.symmetric(horizontal: w * 0.025),
           child: Column(
             children: [
               SizedBox(height: h * 0.1),
@@ -153,24 +153,17 @@ class ProductView extends StatelessWidget {
               SizedBox(
                 height: h * 0.525,
                 child: Consumer<ProductsProvider>(
-                  builder: (_, pro, ___) => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: args.product?.subProducts.length,
-                    itemBuilder: (_, index) {
-                      if (pro.isLoading) {
-                        return Column(
-                          children: [
-                            SizedBox(height: h * 0.2),
-                            const CircularProgressIndicator(),
-                          ],
-                        );
-                      }
-                      if (args.product != null &&
-                          args.product!.subProducts.isNotEmpty) {
-                        return SubProductWidget(
-                          subProduct: args.product!.subProducts[index],
-                        );
-                      }
+                  builder: (_, pro, ___) {
+                    if (pro.isLoading) {
+                      return Column(
+                        children: [
+                          SizedBox(height: h * 0.2),
+                          const CircularProgressIndicator(),
+                        ],
+                      );
+                    }
+                    if (args.product != null &&
+                        args.product!.subProducts.isEmpty) {
                       return Column(
                         children: [
                           SizedBox(height: h * 0.2),
@@ -179,13 +172,21 @@ class ProductView extends StatelessWidget {
                               "لا توجد منتجات",
                               style: TextStyle(
                                 fontSize: h * 0.023,
+                                color: Colors.black,
                               ),
                             ),
                           ),
                         ],
                       );
-                    },
-                  ),
+                    }
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: args.product?.subProducts.length,
+                      itemBuilder: (_, index) => SubProductWidget(
+                        subProduct: args.product!.subProducts[index],
+                      ),
+                    );
+                  },
                 ),
               )
             ],
