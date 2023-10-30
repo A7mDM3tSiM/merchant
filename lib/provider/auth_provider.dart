@@ -55,8 +55,8 @@ class AuthProvider extends ChangeNotifier {
   Future<void> login() async {
     startLoading();
     final user = await _repo.verfyUser(
-      usernameController.text,
-      passwordController.text,
+      usernameController.text.trim(),
+      passwordController.text.trim(),
     );
 
     if (user != null) {

@@ -201,13 +201,6 @@ class ProductsProvider extends ChangeNotifier {
     final id = _products[productIndex].id;
 
     try {
-      // delete all subProducts from the database
-      if (_products[productIndex].subProducts.isNotEmpty) {
-        for (var i = 0; i <= _products[productIndex].subProducts.length; i++) {
-          await deleteSubProduct(productIndex, i, isAfterProductDelete: true);
-        }
-      }
-
       // delete from the products list
       _products.removeAt(productIndex);
 

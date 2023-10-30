@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -18,6 +17,7 @@ class HomeProvider extends ChangeNotifier {
     var diffrance = onPress.difference(willPop).inSeconds;
 
     if (diffrance > 2) {
+      willPop = DateTime.now();
       Fluttertoast.showToast(
         msg: "اضغط مرة اخري للخروج من التطبيق",
         backgroundColor: Colors.grey,
@@ -25,11 +25,7 @@ class HomeProvider extends ChangeNotifier {
       );
       return Future.value(false);
     } else {
-      await SystemChannels.platform.invokeMethod<void>(
-        'SystemNavigator.pop',
-        false,
-      );
-      return Future.value(false);
+      return Future.value(true);
     }
   }
 
