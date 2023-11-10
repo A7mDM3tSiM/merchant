@@ -9,6 +9,14 @@ class Product {
 
   set setId(String id) => this.id = id;
 
+  int get totalCurrentCount {
+    var total = 0;
+    for (final sub in subProducts) {
+      total = total + (sub.totalBought - sub.totalSold);
+    }
+    return total;
+  }
+
   int get totalBoughtCount {
     var total = 0;
     for (final sub in subProducts) {

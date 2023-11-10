@@ -7,16 +7,12 @@ class UserRepo {
   final fb = FirebaseService(collectionPath: "users");
 
   Future<User?> verfyUser(String username, String password) async {
-    try {
-      // get all users from database
-      final users = await fb.getCollectionDocs();
+    // get the user data by field
+    final thisUser = await fb.getDocByfiled('username', username);
 
-      // get the user which the cutomer entered it's username
-      // throw an error if the user does not exist
-      final thisUser = users.where((usr) => usr?['username'] == username).first;
-
-      // verfy that the entered password is correct
-      if (thisUser?['password'] == password) {
+    // verfy that the entered password is correct
+    if (thisUser != null) {
+      if (thisUser['password'] == password) {
         return User.fromMap(thisUser);
       } else {
         Fluttertoast.showToast(
@@ -26,7 +22,7 @@ class UserRepo {
         );
         return null;
       }
-    } on StateError {
+    } else {
       Fluttertoast.showToast(
         msg: "اسم المستخدم غير صحيح",
         backgroundColor: Colors.red,

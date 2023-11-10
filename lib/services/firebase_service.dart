@@ -28,6 +28,18 @@ class FirebaseService {
     return docData;
   }
 
+  /// Get doc data according to a certain field
+  Future<Map<String, dynamic>?> getDocByfiled(
+      String field, Object? object) async {
+    final data = await _fb.where(field, isEqualTo: object).get();
+
+    if (data.docs.isNotEmpty) {
+      return data.docs.first.data();
+    }
+
+    return null;
+  }
+
   /// Get all the doc available in the collection path
   Future<List<Map<String, dynamic>?>> getCollectionDocs() async {
     final list = <Map<String, dynamic>?>[];

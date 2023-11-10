@@ -54,7 +54,29 @@ class ProductView extends StatelessWidget {
                 args.product?.name ?? "",
                 style: TextStyle(fontSize: h * 0.04),
               ),
-              SizedBox(height: h * 0.075),
+              SizedBox(height: h * 0.01),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Consumer<ProductsProvider>(
+                    builder: (_, __, ___) => Text(
+                      args.product?.totalCurrentCount.toString() ?? "",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: h * 0.018,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    ' :العدد الكلي',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: h * 0.018,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: h * 0.05),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
