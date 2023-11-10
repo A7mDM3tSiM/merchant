@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:merchant/models/product/products_repo.dart';
 import 'package:merchant/provider/report_provider.dart';
+import 'package:merchant/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product/product_model.dart';
@@ -248,10 +249,11 @@ class ProductsProvider extends ChangeNotifier {
     stopLoading();
   }
 
-  Future<void> setNewMonthReport(BuildContext context) async {
+  Future<void> setNewMonthReport() async {
+    final context = NavigationService.navKey.currentContext!;
     final report = context.read<ReportProvider>();
 
-    if (await report.isNewMonthReportSet()) {
+    if (!await report.isNewMonthReportSet()) {
       isSettingNewReport = true;
       notifyListeners();
 

@@ -4,6 +4,7 @@ import 'package:merchant/main.dart';
 import 'package:merchant/provider/auth_provider.dart';
 import 'package:merchant/provider/home_provider.dart';
 import 'package:merchant/provider/products_provider.dart';
+import 'package:merchant/provider/report_provider.dart';
 import 'package:merchant/services/navigation_service.dart';
 import 'package:merchant/view/widgets/product_widget.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +22,11 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final pro = context.read<ProductsProvider>();
-      final newMonth = DateTime.now().day == 1;
 
-      pro.fecthProducts();
-      if (newMonth) {
-        pro.setNewMonthReport(context);
-      }
+      await pro.fecthProducts();
+      pro.setNewMonthReport();
     });
   }
 
